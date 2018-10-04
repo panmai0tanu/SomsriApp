@@ -38,4 +38,7 @@ dependencies {
 
     // Permission
     implementation 'com.karumi:dexter:5.0.0'
+
+    // Progressbar
+    implementation 'com.kaopiz:kprogresshud:1.1.0'
 }

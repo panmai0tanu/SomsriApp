@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +24,7 @@ public class TesseractActivity extends AppCompatActivity {
     private TessBaseAPI tessBaseAPI;
     private String pathToDataFile;
     private Bitmap bmp;
+    private KProgressHUD loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,13 @@ public class TesseractActivity extends AppCompatActivity {
 
         byte[] byteArray = getIntent().getByteArrayExtra("image");
         bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+        loading = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel(getString(R.string.loading))
+                .setDimAmount(0.5f);
+
+        loading.show();
 
         prepareTessData();
         startOCR();
