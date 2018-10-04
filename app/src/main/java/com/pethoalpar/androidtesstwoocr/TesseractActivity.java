@@ -24,10 +24,8 @@ public class TesseractActivity extends AppCompatActivity {
     private String pathToDataFile;
     private Bitmap bmp;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tesseract);
 
         byte[] byteArray = getIntent().getByteArrayExtra("image");
         bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -96,4 +94,5 @@ public class TesseractActivity extends AppCompatActivity {
         tessBaseAPI.end();
         return retStr;
     }
+
 }

@@ -38,6 +38,9 @@ dependencies {
     // Permission
     implementation 'com.karumi:dexter:5.0.0'
 
+    // Progressbar
+    implementation 'com.kaopiz:kprogresshud:1.1.0'
+
     // Compress image size
     implementation 'id.zelory:compressor:2.1.0'
 }
