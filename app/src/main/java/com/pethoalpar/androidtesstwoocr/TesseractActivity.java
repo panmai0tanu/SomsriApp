@@ -10,7 +10,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
-import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,22 +23,12 @@ public class TesseractActivity extends AppCompatActivity {
     private TessBaseAPI tessBaseAPI;
     private String pathToDataFile;
     private Bitmap bmp;
-    private KProgressHUD loading;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tesseract);
 
         byte[] byteArray = getIntent().getByteArrayExtra("image");
         bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
-        loading = KProgressHUD.create(this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel(getString(R.string.loading))
-                .setDimAmount(0.5f);
-
-        loading.show();
 
         prepareTessData();
         startOCR();
@@ -55,10 +44,9 @@ public class TesseractActivity extends AppCompatActivity {
             }
             String fileList[] = getResources().getAssets().list("");
             for (String fileName : fileList) {
-                Log.d("PANMAI", fileName);
                 pathToDataFile = dir + "/" + fileName;
                 if (!(new File(pathToDataFile)).exists()) {
-                    InputStream in = getAssets().open(fileName);
+                    InputStream in = getResources().getAssets().open(fileName);
                     OutputStream out = new FileOutputStream(pathToDataFile);
                     byte[] buff = new byte[1024];
                     int len;
@@ -70,18 +58,6 @@ public class TesseractActivity extends AppCompatActivity {
                 }
             }
 
-            pathToDataFile = dir + "/" + "tha.traineddata";
-            if (!(new File(pathToDataFile)).exists()) {
-                InputStream in = getAssets().open("tha.traineddata");
-                OutputStream out = new FileOutputStream(pathToDataFile);
-                byte[] buff = new byte[1024];
-                int len;
-                while ((len = in.read(buff)) > 0) {
-                    out.write(buff, 0, len);
-                }
-                in.close();
-                out.close();
-            }
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
@@ -107,7 +83,7 @@ public class TesseractActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
         String dataPath = getExternalFilesDir("/").getPath() + "/";
-        tessBaseAPI.init(dataPath, "eng");
+        tessBaseAPI.init(dataPath, "eng+tha");
         tessBaseAPI.setImage(bitmap);
         String retStr = "No result";
         try {
@@ -118,4 +94,5 @@ public class TesseractActivity extends AppCompatActivity {
         tessBaseAPI.end();
         return retStr;
     }
+
 }

@@ -3,17 +3,11 @@ package com.pethoalpar.androidtesstwoocr;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import com.scanlibrary.ScanActivity;
 import com.scanlibrary.ScanConstants;
@@ -61,30 +55,25 @@ public class OpencvActivity extends AppCompatActivity {
                 File photoFile = createImageFile();
 
                 os = new FileOutputStream(photoFile);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+                int imageWidth = bitmap.getWidth();
+                int imageHeight = bitmap.getHeight();
+                int newHeight = (imageHeight * 2000) / imageWidth;
+                bitmap = Bitmap.createScaledBitmap(bitmap, 2000, newHeight, true);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, os);
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 10, stream);
                 byte[] byteArray = stream.toByteArray();
 
-                Intent in1 = new Intent(getBaseContext(), TesseractActivity.class);
-                in1.putExtra("image", byteArray);
-                in1.putExtra("test", "test");
-                startActivityForResult(in1, 0);
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                intent.putExtra("image", byteArray);
+                this.setResult(Activity.RESULT_OK, intent);
+                finish();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
-            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-            String result = data.getStringExtra("result");
-            intent.putExtra("result", result);
-            this.setResult(Activity.RESULT_OK, intent);
-            finish();
-        }
-
     }
 
     private File createImageFile() throws IOException {
@@ -102,25 +91,4 @@ public class OpencvActivity extends AppCompatActivity {
         return image;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

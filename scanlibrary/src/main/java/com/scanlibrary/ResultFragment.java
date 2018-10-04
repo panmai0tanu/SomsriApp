@@ -101,7 +101,7 @@ public class ResultFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                dismissDialog();
+//                                dismissDialog();
                                 getActivity().finish();
                             }
                         });
