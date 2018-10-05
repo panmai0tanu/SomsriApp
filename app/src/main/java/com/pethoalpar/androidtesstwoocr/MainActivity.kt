@@ -14,6 +14,10 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.activity_main.*
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+
+
 
 open class MainActivity : AppCompatActivity() {
 
@@ -35,20 +39,17 @@ open class MainActivity : AppCompatActivity() {
 
     private fun validatePermission() {
         Dexter.withActivity(this)
-                .withPermission(Manifest.permission.CAMERA)
-                .withListener(object : PermissionListener {
-                    override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ).withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport) {/* ... */
                     }
 
-                    override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
-                        token?.continuePermissionRequest()
+                    override fun onPermissionRationaleShouldBeShown(permissions: List<PermissionRequest>, token: PermissionToken) {/* ... */
                     }
-
-                    override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-                        finish()
-                    }
-                }
-                ).check()
+                }).check()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

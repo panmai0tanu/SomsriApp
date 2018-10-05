@@ -32,7 +32,7 @@ public class TesseractActivity extends AppCompatActivity {
     private static final String TAG = TesseractActivity.class.getSimpleName();
     private TessBaseAPI tessBaseAPI;
     private String pathToDataFile;
-    private Bitmap bmp;
+    private Bitmap bitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,6 @@ public class TesseractActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
-            Bitmap bitmap = null;
 
             OutputStream os;
             try {
@@ -68,9 +67,8 @@ public class TesseractActivity extends AppCompatActivity {
                 int imageHeight = bitmap.getHeight();
                 int newHeight = (imageHeight * 2000) / imageWidth;
                 bitmap = Bitmap.createScaledBitmap(bitmap, 2000, newHeight, true);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, os);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, os);
 
-                bmp = bitmap;
                 prepareTessData();
                 startOCR();
 
@@ -126,7 +124,7 @@ public class TesseractActivity extends AppCompatActivity {
 
     private void startOCR() {
         try {
-            String result = this.getText(bmp);
+            String result = this.getText(bitmap);
 
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             intent.putExtra("result", result);
@@ -144,7 +142,7 @@ public class TesseractActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
         String dataPath = getExternalFilesDir("/").getPath() + "/";
-        tessBaseAPI.init(dataPath, "eng+tha");
+        tessBaseAPI.init(dataPath, "eng");
         tessBaseAPI.setImage(bitmap);
         String retStr = "No result";
         try {
