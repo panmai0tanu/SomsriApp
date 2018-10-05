@@ -15,7 +15,6 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.activity_main.*
 
-@Suppress("DEPRECATION")
 open class MainActivity : AppCompatActivity() {
 
     private val REQUEST_CODE = 0
@@ -29,9 +28,8 @@ open class MainActivity : AppCompatActivity() {
         validatePermission()
 
         btn_scan.setOnClickListener {
-            startActivityForResult(Intent(this, OpencvActivity::class.java), 0)
-            loadingDialog = ProgressDialog.show(this, null, getString(R.string.loading), true, false)
-
+            startActivityForResult(Intent(this, TesseractActivity::class.java), 0)
+            runOnUiThread { loadingDialog = ProgressDialog.show(this, null, getString(R.string.loading), true, false) }
         }
     }
 
@@ -55,13 +53,6 @@ open class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val byteArray = data!!.getByteArrayExtra("image")
-            val in1 = Intent(this, TesseractActivity::class.java)
-            in1.putExtra("image", byteArray)
-            startActivityForResult(in1, 1)
-        }
-
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             val result = data!!.getStringExtra("result")
             tv_result.text = result
             loadingDialog.dismiss()
