@@ -37,7 +37,7 @@ public class TesseractActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_opencv);
+        setContentView(R.layout.activity_tesseract);
 
         int preference = 4;
         startScan(preference);

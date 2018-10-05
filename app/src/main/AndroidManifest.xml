@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".TesseractActivity" />
-        <activity android:name=".OpencvActivity" />
 
         <provider
             android:name="com.pethoalpar.androidtesstwoocr.TesseractFileProvider"
