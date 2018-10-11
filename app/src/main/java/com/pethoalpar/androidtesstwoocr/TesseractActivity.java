@@ -15,7 +15,6 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 import com.scanlibrary.ScanActivity;
 import com.scanlibrary.ScanConstants;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -73,7 +72,10 @@ public class TesseractActivity extends AppCompatActivity {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                finish();
             }
+        } else {
+            finish();
         }
     }
 
@@ -130,9 +132,10 @@ public class TesseractActivity extends AppCompatActivity {
         try {
             String result = this.getText(bitmap);
 
-            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            Intent intent = new Intent(getBaseContext(), ResultActivity.class);
             intent.putExtra("result", result);
-            this.setResult(Activity.RESULT_OK, intent);
+            startActivity(intent);
+//            this.setResult(Activity.RESULT_OK, intent);
             finish();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
@@ -146,7 +149,7 @@ public class TesseractActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
         String dataPath = getExternalFilesDir("/").getPath() + "/";
-        tessBaseAPI.init(dataPath, "eng+tha");
+        tessBaseAPI.init(dataPath, "eng");
         tessBaseAPI.setImage(bitmap);
         String retStr = "No result";
         try {
