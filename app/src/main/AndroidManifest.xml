@@ -23,7 +23,7 @@
         <activity android:name=".TesseractActivity" />
 
         <provider
-            android:name="com.pethoalpar.androidtesstwoocr.TesseractFileProvider"
+            android:name=".TesseractFileProvider"
             android:authorities="${applicationId}.androidtesstwoocr.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -31,6 +31,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".GetData7_11Activity" />
+        <activity android:name=".GetData7Activity"></activity>
     </application>
 
 </manifest>
