@@ -28,6 +28,7 @@ open class ResultActivity : AppCompatActivity() {
         runOnUiThread { loadingDialog = ProgressDialog.show(this, null, getString(R.string.loading), true, false) }
 
         btn_scan.setOnClickListener {
+            finish()
         }
 
 
