@@ -2,9 +2,8 @@ package com.pethoalpar.androidtesstwoocr
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
 
 class GetData7Activity : AppCompatActivity() {
 
@@ -53,11 +52,18 @@ class GetData7Activity : AppCompatActivity() {
         //Get data on row Item
         i = 0
         for (item in itemList) {
-            if (itemNum.toInt() > 0 && itemNum.toIntOrNull() != null) {
-                if (line > 3 && line < numberLine - 3 && i < itemNum.toInt()){
-                    itemText += item
-                    itemText += '\n'
-                    i++
+            if (itemNum.toIntOrNull() != null) {
+                if (itemNum.toInt() > 0) {
+                    if (line > 3 && line < numberLine - 3 && i < itemNum.toInt()) {
+                        itemText += item
+                        itemText += '\n'
+                        i++
+                    }
+                } else {
+                    if (line > 3 && line < numberLine - 3) {
+                        itemText += item
+                        itemText += '\n'
+                    }
                 }
             } else {
                 if (line > 3 && line < numberLine - 3) {

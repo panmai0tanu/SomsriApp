@@ -12,8 +12,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".SelectReceiptFormActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +34,9 @@
         </provider>
 
         <activity android:name=".GetData7_11Activity" />
-        <activity android:name=".GetData7Activity"></activity>
+        <activity android:name=".GetData7Activity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ResultActivity"></activity>
     </application>
 
 </manifest>

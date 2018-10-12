@@ -8,16 +8,12 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.karumi.dexter.Dexter
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
-import kotlinx.android.synthetic.main.activity_main.*
 import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 
@@ -63,15 +59,15 @@ open class MainActivity : AppCompatActivity() {
             val intent = (Intent(this, GetData7Activity::class.java))
             intent.putExtra("result", result)
             startActivityForResult(intent, 1)
-            loadingDialog.dismiss()
         } else if (requestCode == REQUEST_CODE_GET7 && resultCode == Activity.RESULT_OK) {
             tv_date.text = data!!.getStringExtra("date")
             tv_receipt_num.text = data.getStringExtra("receiptNumber")
             tv_total_price.text = data.getStringExtra("totalPrice")
             tv_items.text = data.getStringExtra("item")
-
-
         }
+
+        loadingDialog.dismiss()
+
     }
 
 }
