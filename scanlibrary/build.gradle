@@ -30,4 +30,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:27.0.0'
+
+    // Progressbar
+    implementation 'com.kaopiz:kprogresshud:1.1.0'
 }

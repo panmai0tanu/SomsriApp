@@ -2,7 +2,6 @@ package com.scanlibrary;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.io.IOException;
 
@@ -30,7 +31,7 @@ public class ResultFragment extends Fragment {
     private Button grayModeButton;
     private Button bwButton;
     private Bitmap transformed;
-    private static ProgressDialogFragment progressDialogFragment;
+    private KProgressHUD loading = null;
 
     public ResultFragment() {
     }
@@ -38,6 +39,12 @@ public class ResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.result_layout, null);
+
+        loading = KProgressHUD.create(getActivity())
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel(getString(R.string.loading))
+                .setDimAmount(0.5f);
+
         init();
         return view;
     }
@@ -82,7 +89,7 @@ public class ResultFragment extends Fragment {
     private class DoneButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            showProgressDialog(getResources().getString(R.string.loading));
+            loading.show();
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -100,6 +107,7 @@ public class ResultFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                loading.dismiss();
                                 getActivity().finish();
                             }
                         });
@@ -114,7 +122,7 @@ public class ResultFragment extends Fragment {
     private class BWButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            showProgressDialog(getResources().getString(R.string.applying_filter));
+            loading.show();
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -127,7 +135,7 @@ public class ResultFragment extends Fragment {
                                 transformed = original;
                                 scannedImageView.setImageBitmap(original);
                                 e.printStackTrace();
-                                dismissDialog();
+                                loading.dismiss();
                                 onClick(v);
                             }
                         });
@@ -136,7 +144,7 @@ public class ResultFragment extends Fragment {
                         @Override
                         public void run() {
                             scannedImageView.setImageBitmap(transformed);
-                            dismissDialog();
+                            loading.dismiss();
                         }
                     });
                 }
@@ -147,7 +155,7 @@ public class ResultFragment extends Fragment {
     private class MagicColorButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            showProgressDialog(getResources().getString(R.string.applying_filter));
+            loading.show();
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -160,7 +168,7 @@ public class ResultFragment extends Fragment {
                                 transformed = original;
                                 scannedImageView.setImageBitmap(original);
                                 e.printStackTrace();
-                                dismissDialog();
+                                loading.dismiss();
                                 onClick(v);
                             }
                         });
@@ -169,7 +177,7 @@ public class ResultFragment extends Fragment {
                         @Override
                         public void run() {
                             scannedImageView.setImageBitmap(transformed);
-                            dismissDialog();
+                            loading.dismiss();
                         }
                     });
                 }
@@ -181,13 +189,13 @@ public class ResultFragment extends Fragment {
         @Override
         public void onClick(View v) {
             try {
-                showProgressDialog(getResources().getString(R.string.applying_filter));
+                loading.show();
                 transformed = original;
                 scannedImageView.setImageBitmap(original);
-                dismissDialog();
+                loading.dismiss();
             } catch (OutOfMemoryError e) {
                 e.printStackTrace();
-                dismissDialog();
+                loading.dismiss();
             }
         }
     }
@@ -195,7 +203,7 @@ public class ResultFragment extends Fragment {
     private class GrayButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            showProgressDialog(getResources().getString(R.string.applying_filter));
+            loading.show();
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -208,7 +216,7 @@ public class ResultFragment extends Fragment {
                                 transformed = original;
                                 scannedImageView.setImageBitmap(original);
                                 e.printStackTrace();
-                                dismissDialog();
+                                loading.dismiss();
                                 onClick(v);
                             }
                         });
@@ -217,26 +225,11 @@ public class ResultFragment extends Fragment {
                         @Override
                         public void run() {
                             scannedImageView.setImageBitmap(transformed);
-                            dismissDialog();
+                            loading.dismiss();
                         }
                     });
                 }
             });
         }
-    }
-
-    protected synchronized void showProgressDialog(String message) {
-        if (progressDialogFragment != null && progressDialogFragment.isVisible()) {
-            // Before creating another loading dialog, close all opened loading dialogs (if any)
-            progressDialogFragment.dismissAllowingStateLoss();
-        }
-        progressDialogFragment = null;
-        progressDialogFragment = new ProgressDialogFragment(message);
-        FragmentManager fm = getFragmentManager();
-        progressDialogFragment.show(fm, ProgressDialogFragment.class.toString());
-    }
-
-    protected synchronized void dismissDialog() {
-        progressDialogFragment.dismissAllowingStateLoss();
     }
 }
