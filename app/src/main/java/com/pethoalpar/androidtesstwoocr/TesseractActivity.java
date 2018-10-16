@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scanlibrary.ScanActivity;
 import com.scanlibrary.ScanConstants;
 
@@ -32,10 +34,16 @@ public class TesseractActivity extends AppCompatActivity {
     private TessBaseAPI tessBaseAPI;
     private String pathToDataFile;
     private Bitmap bitmap = null;
+    private KProgressHUD loading = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        loading = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel(getString(R.string.loading))
+                .setDimAmount(0.5f);
 
         int preference = 4;
         startScan(preference);
@@ -53,27 +61,33 @@ public class TesseractActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
 
-            OutputStream os;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                getContentResolver().delete(uri, null, null);
+            AsyncTask.execute(() -> {
+                OutputStream os;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    getContentResolver().delete(uri, null, null);
 
-                File photoFile = createImageFile();
+                    File photoFile = createImageFile();
 
-                os = new FileOutputStream(photoFile);
-                int imageWidth = bitmap.getWidth();
-                int imageHeight = bitmap.getHeight();
-                int newHeight = (imageHeight * 2000) / imageWidth;
-                bitmap = Bitmap.createScaledBitmap(bitmap, 2000, newHeight, true);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, os);
+                    os = new FileOutputStream(photoFile);
+                    int imageWidth = bitmap.getWidth();
+                    int imageHeight = bitmap.getHeight();
+                    int newHeight = (imageHeight * 2000) / imageWidth;
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 2000, newHeight, true);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, os);
 
-                prepareTessData();
-                startOCR();
+                    prepareTessData();
+                    startOCR();
 
-            } catch (IOException e) {
-                e.printStackTrace();
-                finish();
-            }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    finish();
+                }
+
+            });
+            loading.show();
+
+
         } else {
             finish();
         }
@@ -105,7 +119,7 @@ public class TesseractActivity extends AppCompatActivity {
             String fileList[] = getResources().getAssets().list("");
             for (String fileName : fileList) {
                 pathToDataFile = dir + "/" + fileName;
-                try{
+                try {
                     if (!(new File(pathToDataFile)).exists()) {
                         InputStream in = getResources().getAssets().open(fileName);
                         OutputStream out = new FileOutputStream(pathToDataFile);
@@ -130,12 +144,12 @@ public class TesseractActivity extends AppCompatActivity {
 
     private void startOCR() {
         try {
+
             String result = this.getText(bitmap);
 
             Intent intent = new Intent(getBaseContext(), ResultActivity.class);
             intent.putExtra("result", result);
             startActivity(intent);
-//            this.setResult(Activity.RESULT_OK, intent);
             finish();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
@@ -149,7 +163,7 @@ public class TesseractActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
         String dataPath = getExternalFilesDir("/").getPath() + "/";
-        tessBaseAPI.init(dataPath, "eng");
+        tessBaseAPI.init(dataPath, "eng+tha");
         tessBaseAPI.setImage(bitmap);
         String retStr = "No result";
         try {

@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,9 +38,9 @@ public class ScanFragment extends Fragment {
     private FrameLayout sourceFrame;
     private PolygonView polygonView;
     private View view;
-    private ProgressDialogFragment progressDialogFragment;
     private IScanner scanner;
     private Bitmap original;
+    private KProgressHUD loading;
 
     @Override
     public void onAttach(Activity activity) {
@@ -52,6 +54,12 @@ public class ScanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.scan_fragment_layout, null);
+
+        loading = KProgressHUD.create(getActivity())
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel(getString(R.string.loading))
+                .setDimAmount(0.5f);
+
         init();
         return view;
     }
@@ -208,7 +216,7 @@ public class ScanFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showProgressDialog(getString(R.string.scanning));
+            loading.show();
         }
 
         @Override
@@ -223,18 +231,8 @@ public class ScanFragment extends Fragment {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             bitmap.recycle();
-            dismissDialog();
+            loading.dismiss();
         }
-    }
-
-    protected void showProgressDialog(String message) {
-        progressDialogFragment = new ProgressDialogFragment(message);
-        FragmentManager fm = getFragmentManager();
-        progressDialogFragment.show(fm, ProgressDialogFragment.class.toString());
-    }
-
-    protected void dismissDialog() {
-        progressDialogFragment.dismissAllowingStateLoss();
     }
 
 }
