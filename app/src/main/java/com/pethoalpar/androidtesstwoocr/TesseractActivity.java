@@ -46,13 +46,21 @@ public class TesseractActivity extends AppCompatActivity {
                 .setDimAmount(0.5f);
 
         int preference = 4;
-        startScan(preference);
+        startScan(preference,null);
     }
 
-    protected void startScan(int preference) {
-        Intent intent = new Intent(this, ScanActivity.class);
-        intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
-        startActivityForResult(intent, REQUEST_CODE);
+    protected void startScan(int preference, String url) {
+        if (url == null) {
+            Intent intent = new Intent(this, ScanActivity.class);
+            intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
+            startActivityForResult(intent, REQUEST_CODE);
+        } else {
+            Intent intent = new Intent(this, ScanActivity.class);
+            intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
+            intent.putExtra("url", url);
+            startActivityForResult(intent, 1);
+            loading.dismiss();
+        }
     }
 
     @Override
@@ -74,20 +82,42 @@ public class TesseractActivity extends AppCompatActivity {
                     int imageHeight = bitmap.getHeight();
                     int newHeight = (imageHeight * 2000) / imageWidth;
                     bitmap = Bitmap.createScaledBitmap(bitmap, 2000, newHeight, true);
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, os);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 10, os);
 
-                    prepareTessData();
-                    startOCR();
-
+                    startScan(4, photoFile.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                     finish();
                 }
-
             });
             loading.show();
 
+        } else if (requestCode == 1 && resultCode == Activity.RESULT_OK){
+            Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
+            AsyncTask.execute(() -> {
 
+                OutputStream os;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    getContentResolver().delete(uri, null, null);
+
+                    File photoFile = createImageFile();
+
+                    os = new FileOutputStream(photoFile);
+                    int imageWidth = bitmap.getWidth();
+                    int imageHeight = bitmap.getHeight();
+                    int newHeight = (imageHeight * 1000) / imageWidth;
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 1000, newHeight, true);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 10, os);
+
+                    prepareTessData();
+                    startOCR(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    finish();
+                }
+            });
+            loading.show();
         } else {
             finish();
         }
@@ -142,7 +172,7 @@ public class TesseractActivity extends AppCompatActivity {
         }
     }
 
-    private void startOCR() {
+    private void startOCR(Bitmap bitmap) {
         try {
 
             String result = this.getText(bitmap);
@@ -150,6 +180,7 @@ public class TesseractActivity extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), ResultActivity.class);
             intent.putExtra("result", result);
             startActivity(intent);
+            loading.dismiss();
             finish();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());

@@ -32,6 +32,7 @@ public class ResultFragment extends Fragment {
     private Button bwButton;
     private Bitmap transformed;
     private KProgressHUD loading = null;
+    private String path;
 
     public ResultFragment() {
     }

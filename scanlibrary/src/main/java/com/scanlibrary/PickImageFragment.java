@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,8 +46,35 @@ public class PickImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.pick_image_fragment, null);
-        init();
+
+
+        Bundle bundle = this.getArguments();
+        String url = null;
+        if (bundle != null) {
+            url = bundle.getString("url");
+            if (url == null) {
+                init();
+            } else {
+
+                Bitmap bitmap = loadBitmap(url);
+                if (bitmap != null) {
+                    postImagePick(bitmap);
+                } else {
+                    Toast.makeText(getActivity(), "ERROR!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+
         return view;
+    }
+
+    public Bitmap loadBitmap(String filePath)
+    {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+        return bitmap;
     }
 
     private void init() {
@@ -125,6 +153,7 @@ public class PickImageFragment extends Fragment {
         } else {
             Uri tempFileUri = Uri.fromFile(file);
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempFileUri);
+
         }
         startActivityForResult(cameraIntent, ScanConstants.START_CAMERA_REQUEST_CODE);
     }

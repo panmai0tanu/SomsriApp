@@ -21,7 +21,7 @@ open class ResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_result)
 
         val result = intent.getStringExtra("result")
-        val intent = (Intent(this, GetData7Activity::class.java))
+        val intent = (Intent(this, GetTotalPriceActivity::class.java))
         intent.putExtra("result", result)
         startActivityForResult(intent, 1)
 
@@ -31,15 +31,14 @@ open class ResultActivity : AppCompatActivity() {
             finish()
         }
 
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            tv_date.text = data!!.getStringExtra("date")
-            tv_receipt_num.text = data.getStringExtra("receiptNumber")
-            tv_total_price.text = data.getStringExtra("totalPrice")
-            tv_items.text = data.getStringExtra("item")
+//            tv_date.text = data!!.getStringExtra("date")
+//            tv_receipt_num.text = data.getStringExtra("receiptNumber")
+            tv_total_price.text = data!!.getStringExtra("totalPrice")
+//            tv_items.text = data.getStringExtra("item")
         }
 
         loadingDialog.dismiss()
