@@ -1,7 +1,6 @@
 package com.scanlibrary;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.ComponentCallbacks2;
 import android.graphics.Bitmap;
@@ -13,10 +12,13 @@ import android.os.Bundle;
  */
 public class ScanActivity extends Activity implements IScanner, ComponentCallbacks2 {
 
+    String url = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_layout);
+        url = getIntent().getStringExtra("url");
         init();
     }
 
@@ -24,6 +26,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         PickImageFragment fragment = new PickImageFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ScanConstants.OPEN_INTENT_PREFERENCE, getPreferenceContent());
+        bundle.putString("url", url);
         fragment.setArguments(bundle);
         android.app.FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
