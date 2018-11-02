@@ -28,6 +28,10 @@ class SelectReceiptFormActivity : AppCompatActivity() {
 
         validatePermission()
 
+        btn_chart.setOnClickListener {
+            startActivity(Intent(this, Chart::class.java))
+        }
+
         val intent = Intent(this, TesseractActivity::class.java)
         sevenEleven.setOnClickListener {
             startActivity(intent)
