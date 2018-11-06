@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 
-open class ResultActivity : AppCompatActivity() {
+open class ResultActivity : ToolbarActivity() {
 
     private lateinit var loadingDialog: ProgressDialog
     private val REQUEST_CODE = 1
@@ -19,6 +19,7 @@ open class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+        initializeToolbar()
 
         val result = intent.getStringExtra("result")
         val intent = (Intent(this, GetTotalPriceActivity::class.java))
