@@ -13,13 +13,15 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_select_receipt_form.*
 
-class SelectReceiptFormActivity : AppCompatActivity() {
+class SelectReceiptFormActivity : ToolbarActivity() {
 
     private lateinit var loading: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_receipt_form)
+        initializeToolbar()
+        useBack()
 
         loading = KProgressHUD.create(this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)

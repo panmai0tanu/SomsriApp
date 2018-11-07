@@ -37,7 +37,8 @@
         <activity android:name=".GetData7Activity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ResultActivity" />
-        <activity android:name=".GetTotalPriceActivity"></activity>
+        <activity android:name=".GetTotalPriceActivity" />
+        <activity android:name=".ToolbarActivity"></activity>
     </application>
 
 </manifest>
