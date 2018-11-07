@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".SelectReceiptFormActivity">
 
+    <include layout="@layout/activity_toolbar" />
+
     <ImageView
         android:id="@+id/sevenEleven"
         android:layout_width="90dp"
@@ -15,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:src="@drawable/seven" />
 
     <ImageView
@@ -61,7 +63,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_toEndOf="@+id/sevenEleven"
         android:layout_toRightOf="@+id/sevenEleven"
         android:src="@drawable/tesco" />
