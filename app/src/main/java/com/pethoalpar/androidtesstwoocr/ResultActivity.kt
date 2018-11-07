@@ -19,7 +19,6 @@ open class ResultActivity : ToolbarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
-        initializeToolbar()
 
         val result = intent.getStringExtra("result")
         val intent = (Intent(this, GetTotalPriceActivity::class.java))
