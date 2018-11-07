@@ -38,7 +38,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".GetTotalPriceActivity" />
-        <activity android:name=".Chart"></activity>
+        <activity android:name=".ToolbarActivity"></activity>
     </application>
 
 </manifest>

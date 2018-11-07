@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 
-open class ResultActivity : AppCompatActivity() {
+open class ResultActivity : ToolbarActivity() {
 
     private lateinit var loadingDialog: ProgressDialog
     private val REQUEST_CODE = 1

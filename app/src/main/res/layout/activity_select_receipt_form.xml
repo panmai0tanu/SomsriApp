@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".SelectReceiptFormActivity">
 
-    <include layout="@layout/activity_toolbar"></include>
+
+    <include layout="@layout/activity_toolbar" />
 
     <ImageView
         android:id="@+id/sevenEleven"
