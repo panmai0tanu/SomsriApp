@@ -20,10 +20,10 @@ class ShowDataActivity : ToolbarActivity() {
         }
 
         tv_item_1.setOnClickListener {
-            if (!expandable_item_1.isExpanded){
-                expandable_item_1.expand()
+            if (sv_list_item_detail.visibility == View.GONE){
+                sv_list_item_detail.visibility = View.VISIBLE
             } else {
-                expandable_item_1.collapse()
+                sv_list_item_detail.visibility = View.GONE
             }
         }
 

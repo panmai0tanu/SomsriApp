@@ -20,4 +20,5 @@
     <color name="fuchsia">#FF00FF</color>
     <color name="purple">#800080</color>
     <color name="green_sea">#FF00B279</color>
+    <color name="tool_color">#00B279</color>
 </resources>
