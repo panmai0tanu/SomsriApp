@@ -2,8 +2,8 @@
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/gray">
+    android:layout_height="50dp"
+    android:background="@color/tool_color">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -14,9 +14,9 @@
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/back_ic"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/left_arrow"
             android:visibility="invisible"/>
 
         <Button
@@ -38,11 +38,13 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="Title"
             android:layout_centerInParent="true"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:fontFamily="Mitr-Regular"
+            android:lineSpacingMultiplier="1.22" />
 
     </RelativeLayout>
 

@@ -31,7 +31,7 @@ class SelectReceiptFormActivity : ToolbarActivity() {
         validatePermission()
 
         val intent = Intent(this, TesseractActivity::class.java)
-        sevenEleven.setOnClickListener {
+        iv_sevenEleven.setOnClickListener {
             startActivity(intent)
             loading.show()
         }

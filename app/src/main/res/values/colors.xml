@@ -6,4 +6,5 @@
     <color name="gray">#CBC7C7</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="tool_color">#00B279</color>
 </resources>
