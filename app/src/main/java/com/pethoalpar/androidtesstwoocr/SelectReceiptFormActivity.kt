@@ -36,6 +36,10 @@ class SelectReceiptFormActivity : ToolbarActivity() {
             loading.show()
         }
 
+        iv_other.setOnClickListener {
+            startActivity(Intent(this, SettingActivity::class.java))
+        }
+
     }
 
     private fun validatePermission() {
