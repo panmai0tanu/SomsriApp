@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SelectReceiptFormActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +40,7 @@
         <activity android:name=".GetTotalPriceActivity" />
         <activity android:name=".ToolbarActivity" />
         <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".SelectReceiptFormActivity"></activity>
     </application>
 
 </manifest>
