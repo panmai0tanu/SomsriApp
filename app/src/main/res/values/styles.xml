@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -16,5 +16,26 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="receipt">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="shareAlt">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FF348FC7</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="edit">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FFFFA17F</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
 
 </resources>
