@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ShowDataActivity">
+
+    <include layout="@layout/activity_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/select_month"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/chevronLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="50dp"
+            android:width="10dp"
+            android:height="18dp"
+            android:text="chevron-left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="10dp"
+            android:height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="50dp"
+            style="@style/chevronRight"
+            android:text="chevron-right" />
+
+        <TextView
+            style="@style/monthBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:width="129dp"
+            android:height="24dp"
+            android:text="พฤศจิกายน 2561 " />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/gray"
+        android:text="Cart" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="230dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_item_1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/list_item"
+                android:text="Item" />
+
+            <ScrollView
+                android:id="@+id/sv_list_item_detail"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/list_item_detail"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:width="129dp"
+                        android:height="18dp"
+                        android:background="@drawable/list_item_detail"
+                        android:text="รายการซื้อของที่เซเว่น  " />
+
+                    <TextView
+                        style="@style/list_item_detail"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:width="129dp"
+                        android:height="18dp"
+                        android:background="@drawable/list_item_detail"
+                        android:text="รายการซื้อของที่เซเว่น  " />
+
+                    <TextView
+                        style="@style/list_item_detail"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:width="129dp"
+                        android:height="18dp"
+                        android:background="@drawable/list_item_detail"
+                        android:text="รายการซื้อของที่เซเว่น  " />
+
+                    <TextView
+                        style="@style/list_item_detail"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:width="129dp"
+                        android:height="18dp"
+                        android:background="@drawable/list_item_detail"
+                        android:text="รายการซื้อของที่เซเว่น  " />
+
+                    <TextView
+                        style="@style/list_item_detail"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:width="129dp"
+                        android:height="18dp"
+                        android:background="@drawable/list_item_detail"
+                        android:text="รายการซื้อของที่เซเว่น  " />
+
+                </LinearLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/tv_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/list_item"
+                android:text="Item" />
+
+            <TextView
+                android:id="@+id/tv_item_3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/list_item"
+                android:text="Item" />
+
+            <TextView
+                android:id="@+id/tv_item_4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/list_item"
+                android:text="Item" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_new"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/new_receipt_oval" />
+
+        <TextView
+            style="@style/plus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:width="16.41dp"
+            android:height="21dp"
+            android:text="plus" />
+    </RelativeLayout>
+</LinearLayout>

@@ -17,34 +17,37 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:background="@drawable/left_arrow"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
-        <Button
+        <TextView
             android:id="@+id/btn_setting"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/setting_ic"
-            android:visibility="invisible"/>
+            android:width="25dp"
+            android:height="24dp"
+            style="@style/cog"
+            android:visibility="invisible"
+            android:text="cog" />
 
         <Button
             android:id="@+id/btn_camera"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/camera_ic"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Title"
             android:layout_centerInParent="true"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:fontFamily="Mitr-Regular"
-            android:lineSpacingMultiplier="1.22" />
+            android:lineSpacingMultiplier="1.22"
+            android:text="Title"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

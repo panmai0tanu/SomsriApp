@@ -50,4 +50,7 @@ dependencies {
 
     //Async
     implementation 'org.jetbrains.anko:anko-common:0.9'
+
+    //ExpandableLayout
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 }

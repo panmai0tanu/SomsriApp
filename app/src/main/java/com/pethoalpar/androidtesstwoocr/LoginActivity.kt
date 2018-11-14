@@ -12,7 +12,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         tv_login.setOnClickListener {
-            startActivity(Intent(this, SelectReceiptFormActivity::class.java))
+            startActivity(Intent(this, ShowDataActivity::class.java))
         }
     }
 }
