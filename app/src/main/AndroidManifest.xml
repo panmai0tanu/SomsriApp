@@ -42,7 +42,8 @@
         <activity android:name=".SettingActivity" />
         <activity android:name=".SelectReceiptFormActivity" />
         <activity android:name=".ShowDataActivity" />
-        <activity android:name=".DetailItemsActivity"></activity>
+        <activity android:name=".DetailItemsActivity" />
+        <activity android:name=".MainApp"></activity>
     </application>
 
 </manifest>

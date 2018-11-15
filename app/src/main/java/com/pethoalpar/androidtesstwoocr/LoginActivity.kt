@@ -1,11 +1,15 @@
 package com.pethoalpar.androidtesstwoocr
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_login.*
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
-class LoginActivity : AppCompatActivity() {
+
+class LoginActivity : MainApp() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,4 +19,5 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, ShowDataActivity::class.java))
         }
     }
+
 }

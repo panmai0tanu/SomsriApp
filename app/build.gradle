@@ -56,4 +56,7 @@ dependencies {
 
     //Image circle
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+    //Font
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
 }
