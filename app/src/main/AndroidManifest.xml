@@ -39,9 +39,10 @@
         <activity android:name=".ResultActivity" />
         <activity android:name=".GetTotalPriceActivity" />
         <activity android:name=".ToolbarActivity" />
-        <activity android:name=".SettingActivity"/>
-        <activity android:name=".SelectReceiptFormActivity"/>
-            <activity android:name=".ShowDataActivity"/>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".SelectReceiptFormActivity" />
+        <activity android:name=".ShowDataActivity" />
+        <activity android:name=".DetailItemsActivity"></activity>
     </application>
 
 </manifest>

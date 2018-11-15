@@ -53,4 +53,7 @@ dependencies {
 
     //ExpandableLayout
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
+    //Image circle
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
 }

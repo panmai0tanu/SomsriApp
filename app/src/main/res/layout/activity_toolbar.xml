@@ -16,14 +16,15 @@
             android:id="@+id/btn_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/left_arrow"
+            android:background="@drawable/arrow_left"
             android:visibility="invisible" />
 
-        <TextView
+        <ImageView
             android:id="@+id/btn_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
+            android:background="@drawable/cog"
             android:width="25dp"
             android:height="24dp"
             style="@style/cog"
@@ -34,7 +35,7 @@
             android:id="@+id/btn_camera"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/camera_ic"
+            android:background="@drawable/camera_alt"
             android:visibility="invisible" />
 
         <TextView

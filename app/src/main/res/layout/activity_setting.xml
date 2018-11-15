@@ -15,19 +15,22 @@
         android:layout_height="wrap_content"
         android:background="@color/white">
 
-        <TextView
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tv_img_pro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/img_profile" />
+            android:src="@drawable/image_violet"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="64dp"
             android:layout_marginTop="15dp"
+            android:layout_marginLeft="7dp"
             android:layout_toLeftOf="@+id/tv_chevron_right"
             android:layout_toRightOf="@+id/tv_img_pro">
 
@@ -44,14 +47,14 @@
             <TextView
                 android:id="@+id/tv_facebook_square"
                 style="@style/facebookSquare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="3dp"
                 android:width="14dp"
                 android:height="14dp"
-                android:text="facebook-square" />
+                android:background="@drawable/facebook_square_sm" />
 
             <TextView
                 style="@style/loginBy"
@@ -70,14 +73,14 @@
         <TextView
             android:id="@+id/tv_chevron_right"
             style="@style/chevronRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
             android:width="10dp"
             android:height="18dp"
-            android:text="chevron-right" />
+            android:background="@drawable/chevron_right" />
 
     </RelativeLayout>
 
@@ -90,15 +93,15 @@
         <TextView
             android:id="@+id/tv_ic_sync"
             style="@style/somsri"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:width="22dp"
             android:height="22dp"
-            android:text="Somsri" />
+            android:background="@drawable/logo_somsri" />
 
         <TextView
             style="@style/syncSomsriText"
@@ -115,14 +118,14 @@
         <TextView
             android:id="@+id/tv_chevron_right_sync"
             style="@style/chevronRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
             android:width="10dp"
             android:height="18dp"
-            android:text="chevron-right" />
+            android:background="@drawable/chevron_right" />
 
     </RelativeLayout>
 
@@ -135,15 +138,15 @@
         <TextView
             android:id="@+id/tv_ic_dropbox"
             style="@style/dropbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:width="20dp"
             android:height="18dp"
-            android:text="dropbox" />
+            android:background="@drawable/dropbox" />
 
         <TextView
             style="@style/DropboxText"
@@ -160,14 +163,14 @@
         <TextView
             android:id="@+id/tv_chevron_right_dropbox"
             style="@style/chevronRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
             android:width="10dp"
             android:height="18dp"
-            android:text="chevron-right" />
+            android:background="@drawable/chevron_right" />
 
     </RelativeLayout>
 
@@ -180,15 +183,15 @@
         <TextView
             android:id="@+id/tv_ic_info"
             style="@style/infoCircle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:width="20dp"
             android:height="18dp"
-            android:text="info-circle" />
+            android:background="@drawable/info_circle" />
 
         <TextView
             style="@style/infoText"
@@ -205,14 +208,14 @@
         <TextView
             android:id="@+id/tv_chevron_right_info"
             style="@style/chevronRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
             android:width="10dp"
             android:height="18dp"
-            android:text="chevron-right" />
+            android:background="@drawable/chevron_right" />
 
     </RelativeLayout>
 
@@ -226,15 +229,15 @@
         <TextView
             android:id="@+id/tv_ic_question"
             style="@style/questionCircle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:width="20dp"
             android:height="18dp"
-            android:text="question-circle" />
+            android:background="@drawable/question_circle" />
 
         <TextView
             style="@style/questionText"
@@ -251,14 +254,14 @@
         <TextView
             android:id="@+id/tv_chevron_right_question"
             style="@style/chevronRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
             android:width="10dp"
             android:height="18dp"
-            android:text="chevron-right" />
+            android:background="@drawable/chevron_right" />
 
     </RelativeLayout>
 
@@ -275,15 +278,15 @@
             <TextView
                 android:id="@+id/tv_ic_power_off"
                 style="@style/powerOff"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="18dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="20dp"
                 android:width="20dp"
                 android:height="18dp"
-                android:text="power-off" />
+                android:background="@drawable/power_off" />
 
             <TextView
                 style="@style/powerOffText"
@@ -300,15 +303,15 @@
             <TextView
                 android:id="@+id/tv_chevron_right_power_off"
                 style="@style/chevronRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="10dp"
+                android:layout_height="18dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="25dp"
                 android:width="10dp"
                 android:height="18dp"
-                android:text="chevron-right" />
+                android:background="@drawable/chevron_right" />
         </RelativeLayout>
 
     </RelativeLayout>

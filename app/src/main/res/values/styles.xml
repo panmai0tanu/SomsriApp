@@ -24,6 +24,13 @@
         <item name="android:lineSpacingMultiplier">1.19</item>
     </style>
 
+    <style name="receipt">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
     <style name="facebookSquare">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5BrandsRegular</item>
         <item name="android:textColor">#FF2786EB</item>
@@ -122,6 +129,13 @@
         <item name="android:lineSpacingMultiplier">1.22</item>
     </style>
 
+    <style name="shareAlt">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FF348FC7</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
     <style name="questionText">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
         <item name="android:textColor">#FF626C7C</item>
@@ -139,6 +153,13 @@
     <style name="powerOff">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
         <item name="android:textColor">#FFDD3305</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="edit">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FFFFA17F</item>
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingMultiplier">1.22</item>
     </style>

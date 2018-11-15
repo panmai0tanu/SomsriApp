@@ -16,7 +16,7 @@ class ShowDataActivity : ToolbarActivity() {
         initializeToolbar(resources.getString(R.string.somsri_expense))
         useSetting()
 
-        btn_new.setOnClickListener {
+        new_item.setOnClickListener {
             startActivity(Intent(this, SelectReceiptFormActivity::class.java))
         }
 
@@ -26,6 +26,10 @@ class ShowDataActivity : ToolbarActivity() {
             } else {
                 sv_list_item_detail.visibility = View.GONE
             }
+        }
+
+        tv_item_detail_1.setOnClickListener {
+            startActivity(Intent(this, DetailItemsActivity::class.java))
         }
 
         btn_setting.setOnClickListener {

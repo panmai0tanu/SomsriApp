@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,27 +14,23 @@
         android:background="@drawable/select_month"
         android:orientation="horizontal">
 
-        <TextView
+        <ImageView
             style="@style/chevronLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="50dp"
-            android:width="10dp"
-            android:height="18dp"
-            android:text="chevron-left" />
+            android:background="@drawable/chevron_left" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="10dp"
-            android:height="18dp"
+        <ImageView
+            style="@style/chevronRight"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="50dp"
-            style="@style/chevronRight"
-            android:text="chevron-right" />
+            android:background="@drawable/chevron_right" />
 
         <TextView
             style="@style/monthBar"
@@ -57,7 +52,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="230dp">
+        android:layout_height="240dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,8 +82,9 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_item_detail_1"
                         style="@style/list_item_detail"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:width="129dp"
                         android:height="18dp"
@@ -161,22 +157,25 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="90dp"
+        android:paddingVertical="10dp">
 
-        <Button
-            android:id="@+id/btn_new"
+        <RelativeLayout
+            android:id="@+id/new_item"
             android:layout_width="60dp"
+            android:layout_centerHorizontal="true"
             android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/new_receipt_oval" />
+            android:background="@drawable/buttom_plus"
+            android:gravity="center_vertical">
 
-        <TextView
-            style="@style/plus"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:width="16.41dp"
-            android:height="21dp"
-            android:text="plus" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/plus" />
+
+        </RelativeLayout>
+
     </RelativeLayout>
+
 </LinearLayout>
