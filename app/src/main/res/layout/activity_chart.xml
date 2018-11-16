@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".Chart">
 
-    <com.github.mikephil.charting.charts.PieChart
+    <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="200dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -2,12 +2,10 @@ package com.pethoalpar.androidtesstwoocr
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import kotlinx.android.synthetic.main.activity_chart.*
-
-
 
 
 class Chart : AppCompatActivity() {
@@ -16,23 +14,28 @@ class Chart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chart)
 
-        chart
+        setdata(30)
+        chart.setFitBars(true)
+        chart.description = null
+    }
 
-        var dataObjects = arrayListOf(1,2,3)
+    private fun setdata(count: Int) {
+        val yVals: ArrayList<BarEntry> = ArrayList()
+        val color: MutableList<Int> = ArrayList()
 
-        val entries: MutableList<PieEntry> = ArrayList()
-
-        for (data in dataObjects) {
-            var entry = PieEntry(data.toFloat())
-            entries.add(entry)
+        for (i in 0 until count) {
+            yVals.add(BarEntry(i.toFloat(), i.toFloat()))
+            color.add(i, resources.getColor(R.color.chart))
         }
 
-        val dataSet: PieDataSet = PieDataSet(entries, "label") //new LineDataSet(list1, "Label")
-        dataSet.color = R.color.abc_btn_colored_borderless_text_material
-        dataSet.valueTextColor = R.color.blue
+        val set = BarDataSet(yVals, null)
+        set.colors = color
+        set.setDrawValues(true)
 
-        val lineData = PieData(dataSet)
-        chart.data = lineData
-        chart.invalidate() // refresh
+        val data = BarData(set)
+
+        chart.data = data
+        chart.animateY(500)
+
     }
 }
