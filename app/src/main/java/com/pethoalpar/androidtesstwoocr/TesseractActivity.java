@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class TesseractActivity extends AppCompatActivity {
+public class TesseractActivity extends ToolbarActivity {
 
     private static final int REQUEST_CODE = 99;
     public static final String TESS_DATA = "/tessdata";

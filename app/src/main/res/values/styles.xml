@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -16,5 +16,306 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="infoGmailCom">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="receipt">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="facebookSquare">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5BrandsRegular</item>
+        <item name="android:textColor">#FF2786EB</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="loginBy">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF2786EB</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">1.17</item>
+    </style>
+
+    <style name="plus">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProLight</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="list_item_detail">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Regular</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">1.17</item>
+    </style>
+
+    <style name="chevronRight">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProLight</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="userAlt">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="somsri">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5BrandsRegular</item>
+        <item name="android:textColor">#FF0077FC</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="lockAlt">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="syncSomsriText">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="dropbox">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5BrandsRegular</item>
+        <item name="android:textColor">#FF0077FC</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="DropboxText">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="infoCircle">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="questionCircle">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="chevronLeft">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProLight</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="shareAlt">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FF348FC7</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="questionText">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="infoText">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="powerOff">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FFDD3305</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="edit">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProRegular</item>
+        <item name="android:textColor">#FFFFA17F</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="powerOffText">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="forgetPass">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">1.17</item>
+    </style>
+
+    <style name="logIn">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="monthBar">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Regular</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="dontHaveAnAccoun">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">1.17</item>
+    </style>
+
+    <style name="or">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="facebook">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5BrandsRegular</item>
+        <item name="android:textColor">#FF2685EB</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="google">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5BrandsRegular</item>
+        <item name="android:textColor">#FFDD6938</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="cog">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProLight</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="text_total">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="int_total">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Regular</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="thb_green">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="thb_detail">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="thb_gray">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">1.17</item>
+    </style>
+
+    <style name="show_day">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">1.17</item>
+    </style>
+
+    <style name="total_cost">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Regular</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="all_expenses">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Light</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="details_item">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Regular</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">1.17</item>
+    </style>
+
+    <style name="cost">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">Kanit-Regular</item>
+        <item name="android:textColor">#FF626C7C</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">1.17</item>
+    </style>
+
+    <style name="angleDown">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProLight</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="angleRight">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProLight</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="angleUp">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">FontAwesome5ProLight</item>
+        <item name="android:textColor">#FF00B279</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
 
 </resources>

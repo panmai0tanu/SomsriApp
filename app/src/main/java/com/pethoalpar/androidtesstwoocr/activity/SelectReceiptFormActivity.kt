@@ -31,14 +31,14 @@ class SelectReceiptFormActivity : ToolbarActivity() {
 
         validatePermission()
 
-        btn_chart.setOnClickListener {
-            startActivity(Intent(this, Chart::class.java))
-        }
-
         val intent = Intent(this, TesseractActivity::class.java)
-        sevenEleven.setOnClickListener {
+        iv_sevenEleven.setOnClickListener {
             startActivity(intent)
             loading.show()
+        }
+
+        iv_other.setOnClickListener {
+            startActivity(Intent(this, DetailItemsActivity::class.java))
         }
 
     }
