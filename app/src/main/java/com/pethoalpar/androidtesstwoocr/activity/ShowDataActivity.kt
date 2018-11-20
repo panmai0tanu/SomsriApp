@@ -1,4 +1,4 @@
-package com.pethoalpar.androidtesstwoocr
+package com.pethoalpar.androidtesstwoocr.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,8 @@ import android.support.v7.widget.LinearLayoutManager
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.pethoalpar.androidtesstwoocr.adapter.DetailsItemAdapter
+import com.pethoalpar.androidtesstwoocr.R
+import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.adapter.ItemAdapter
 import kotlinx.android.synthetic.main.activity_show_data.*
 import kotlinx.android.synthetic.main.activity_toolbar.*

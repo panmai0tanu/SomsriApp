@@ -1,4 +1,4 @@
-package com.pethoalpar.androidtesstwoocr;
+package com.pethoalpar.androidtesstwoocr.activity;
 
 import android.app.Activity;
 

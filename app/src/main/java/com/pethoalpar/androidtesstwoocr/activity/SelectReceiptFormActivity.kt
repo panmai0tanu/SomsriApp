@@ -1,18 +1,18 @@
-package com.pethoalpar.androidtesstwoocr
+package com.pethoalpar.androidtesstwoocr.activity
 
 import android.Manifest
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.pethoalpar.androidtesstwoocr.R
+import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import kotlinx.android.synthetic.main.activity_select_receipt_form.*
-import kotlinx.android.synthetic.main.activity_toolbar.*
 
 class SelectReceiptFormActivity : ToolbarActivity() {
 

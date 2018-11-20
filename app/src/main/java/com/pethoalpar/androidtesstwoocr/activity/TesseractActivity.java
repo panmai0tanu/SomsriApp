@@ -1,5 +1,6 @@
-package com.pethoalpar.androidtesstwoocr;
+package com.pethoalpar.androidtesstwoocr.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,12 +9,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.pethoalpar.androidtesstwoocr.R;
+import com.pethoalpar.androidtesstwoocr.ToolbarActivity;
 import com.scanlibrary.ScanActivity;
 import com.scanlibrary.ScanConstants;
 
@@ -26,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+@SuppressLint("Registered")
 public class TesseractActivity extends ToolbarActivity {
 
     private static final int REQUEST_CODE = 99;

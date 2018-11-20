@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_bg"
     android:orientation="vertical"
-    tools:context=".DetailItemsActivity">
+    tools:context=".activity.DetailItemsActivity">
 
     <include layout="@layout/activity_toolbar" />
 

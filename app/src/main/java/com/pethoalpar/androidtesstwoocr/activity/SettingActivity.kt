@@ -1,7 +1,8 @@
-package com.pethoalpar.androidtesstwoocr
+package com.pethoalpar.androidtesstwoocr.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.pethoalpar.androidtesstwoocr.R
+import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 
 class SettingActivity : ToolbarActivity() {
 
