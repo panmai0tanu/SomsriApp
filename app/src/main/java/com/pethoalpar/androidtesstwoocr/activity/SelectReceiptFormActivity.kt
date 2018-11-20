@@ -12,6 +12,7 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_select_receipt_form.*
+import kotlinx.android.synthetic.main.activity_toolbar.*
 
 class SelectReceiptFormActivity : ToolbarActivity() {
 
@@ -31,9 +32,13 @@ class SelectReceiptFormActivity : ToolbarActivity() {
         validatePermission()
 
         val intent = Intent(this, TesseractActivity::class.java)
-        sevenEleven.setOnClickListener {
+        iv_sevenEleven.setOnClickListener {
             startActivity(intent)
             loading.show()
+        }
+
+        iv_other.setOnClickListener {
+            startActivity(Intent(this, DetailItemsActivity::class.java))
         }
 
     }

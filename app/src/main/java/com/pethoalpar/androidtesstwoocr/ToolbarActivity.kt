@@ -1,12 +1,15 @@
 package com.pethoalpar.androidtesstwoocr
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_toolbar.*
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
-open class ToolbarActivity : AppCompatActivity() {
+open class ToolbarActivity : MainApp() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,7 @@ open class ToolbarActivity : AppCompatActivity() {
     protected fun useSetting() {
         btn_setting.visibility = View.VISIBLE
         btn_setting.setOnClickListener {
-//            startActivity(Intent(this, SettingActivity::class.java))
+            startActivity(Intent(this, SettingActivity::class.java))
         }
     }
 
