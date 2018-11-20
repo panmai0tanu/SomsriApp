@@ -32,6 +32,7 @@ class SelectReceiptFormActivity : ToolbarActivity() {
         validatePermission()
 
         val intent = Intent(this, TesseractActivity::class.java)
+        intent.putExtra("languageProcess", "eng")
         iv_sevenEleven.setOnClickListener {
             startActivity(intent)
             loading.show()

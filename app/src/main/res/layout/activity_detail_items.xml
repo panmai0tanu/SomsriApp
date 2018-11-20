@@ -25,6 +25,7 @@
             android:textSize="18sp" />
 
         <EditText
+            android:id="@+id/et_total_cost"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -76,12 +77,20 @@
             android:background="@drawable/edit_red" />
     </RelativeLayout>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@color/white" />
+        android:background="@drawable/bg_img_view">
+
+        <ImageView
+            android:id="@+id/iv_receipt"
+            android:layout_width="220dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,7 +108,7 @@
             android:background="@color/buttom_green_color"
             android:text="บันทึก"
             android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
 
         <Button
@@ -112,7 +121,7 @@
             android:background="@color/buttom_red_color"
             android:text="ลบ"
             android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
 
     </LinearLayout>
