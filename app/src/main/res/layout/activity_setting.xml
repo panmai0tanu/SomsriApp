@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_setting"
     android:orientation="vertical"
-    tools:context=".SettingActivity">
+    tools:context=".activity.SettingActivity">
 
     <include layout="@layout/activity_toolbar" />
 

@@ -1,16 +1,12 @@
 package com.pethoalpar.androidtesstwoocr.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.TextView
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import com.pethoalpar.androidtesstwoocr.R
-import com.pethoalpar.androidtesstwoocr.ShowDataActivity
 import kotlinx.android.synthetic.main.list_item.view.*
 
 

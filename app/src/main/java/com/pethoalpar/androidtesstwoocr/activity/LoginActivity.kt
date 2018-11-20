@@ -1,12 +1,9 @@
 package com.pethoalpar.androidtesstwoocr
 
-import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.pethoalpar.androidtesstwoocr.activity.ShowDataActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 
 class LoginActivity : MainApp() {

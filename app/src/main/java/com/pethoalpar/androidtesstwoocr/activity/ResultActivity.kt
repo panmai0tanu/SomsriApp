@@ -1,11 +1,12 @@
 @file:Suppress("DEPRECATION")
-package com.pethoalpar.androidtesstwoocr
+package com.pethoalpar.androidtesstwoocr.activity
 
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.pethoalpar.androidtesstwoocr.R
+import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
