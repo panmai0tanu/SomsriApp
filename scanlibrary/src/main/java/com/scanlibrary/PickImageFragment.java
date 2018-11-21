@@ -46,26 +46,7 @@ public class PickImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.pick_image_fragment, null);
-
-
-        Bundle bundle = this.getArguments();
-        String url = null;
-        if (bundle != null) {
-            url = bundle.getString("url");
-            if (url == null) {
-                init();
-            } else {
-
-                Bitmap bitmap = loadBitmap(url);
-                if (bitmap != null) {
-                    postImagePick(bitmap);
-                } else {
-                    Toast.makeText(getActivity(), "ERROR!!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-
-
+        init();
         return view;
     }
 
