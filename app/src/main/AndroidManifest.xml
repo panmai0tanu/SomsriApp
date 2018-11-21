@@ -14,17 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SelectReceiptFormActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TesseractActivity" />
+        <activity android:name=".activity.TesseractActivity" />
 
         <provider
-            android:name=".TesseractFileProvider"
+            android:name=".activity.TesseractFileProvider"
             android:authorities="${applicationId}.androidtesstwoocr.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -33,12 +33,19 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".GetData7_11Activity" />
-        <activity android:name=".GetData7Activity" />
+        <activity android:name=".activity.GetData7_11Activity" />
+        <activity android:name=".activity.GetData7Activity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ResultActivity" />
-        <activity android:name=".GetTotalPriceActivity" />
-        <activity android:name=".ToolbarActivity"></activity>
+        <activity android:name=".activity.ResultActivity" />
+        <activity android:name=".activity.GetTotalPriceActivity" />
+        <activity android:name=".ToolbarActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.SelectReceiptFormActivity" />
+        <activity android:name=".activity.ShowDataActivity" />
+        <activity android:name=".activity.DetailItemsActivity" />
+        <activity android:name=".MainApp" />
+        <activity android:name=".adapter.ItemAdapter" />
+        <activity android:name=".adapter.DetailsItemAdapter"/>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,20 +51,62 @@ public class ResultFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        loading.show();
+        Uri uri = getUri();
+        try {
+            original = Utils.getBitmap(getActivity(), uri);
+            getActivity().getContentResolver().delete(uri, null, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Intent data = new Intent();
+                    Bitmap bitmap = transformed;
+                    if (bitmap == null) {
+                        bitmap = original;
+                    }
+                    Uri uri = Utils.getUri(getActivity(), bitmap);
+                    data.putExtra(ScanConstants.SCANNED_RESULT, uri);
+                    getActivity().setResult(Activity.RESULT_OK, data);
+                    original.recycle();
+                    System.gc();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            loading.dismiss();
+                            getActivity().finish();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     private void init() {
-        scannedImageView = (ImageView) view.findViewById(R.id.scannedImage);
-        originalButton = (Button) view.findViewById(R.id.original);
-        originalButton.setOnClickListener(new OriginalButtonClickListener());
-        MagicColorButton = (Button) view.findViewById(R.id.magicColor);
-        MagicColorButton.setOnClickListener(new MagicColorButtonClickListener());
-        grayModeButton = (Button) view.findViewById(R.id.grayMode);
-        grayModeButton.setOnClickListener(new GrayButtonClickListener());
-        bwButton = (Button) view.findViewById(R.id.BWMode);
-        bwButton.setOnClickListener(new BWButtonClickListener());
-        Bitmap bitmap = getBitmap();
-        setScannedImage(bitmap);
-        doneButton = (Button) view.findViewById(R.id.doneButton);
-        doneButton.setOnClickListener(new DoneButtonClickListener());
+//        scannedImageView = (ImageView) view.findViewById(R.id.scannedImage);
+//        originalButton = (Button) view.findViewById(R.id.original);
+//        originalButton.setOnClickListener(new OriginalButtonClickListener());
+//        MagicColorButton = (Button) view.findViewById(R.id.magicColor);
+//        MagicColorButton.setOnClickListener(new MagicColorButtonClickListener());
+//        grayModeButton = (Button) view.findViewById(R.id.grayMode);
+//        grayModeButton.setOnClickListener(new GrayButtonClickListener());
+//        bwButton = (Button) view.findViewById(R.id.BWMode);
+//        bwButton.setOnClickListener(new BWButtonClickListener());
+//        Bitmap bitmap = getBitmap();
+//        setScannedImage(bitmap);
+//        doneButton = (Button) view.findViewById(R.id.doneButton);
+//        doneButton.setOnClickListener(new DoneButtonClickListener());
+
     }
 
     private Bitmap getBitmap() {
