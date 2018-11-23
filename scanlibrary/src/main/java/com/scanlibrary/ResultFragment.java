@@ -63,6 +63,7 @@ public class ResultFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
