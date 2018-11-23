@@ -1,41 +1,30 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
-import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import kotlinx.android.synthetic.main.activity_detail_items.*
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
+import kotlinx.android.synthetic.main.activity_show_image.*
 
-
-class DetailItemsActivity : ToolbarActivity() {
+class ShowImageActivity : ToolbarActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_items)
-
-        initializeToolbar("รายการซื้อของที่เซเว่น")
+        setContentView(R.layout.activity_show_image)
+        initializeToolbar()
+        useEdit()
         useBack()
 
-        val totalCost = intent.getStringExtra("totalCost")
-        val imgFile = intent.getStringExtra("imgFile")
-
-
-        et_total_cost.setText(totalCost)
+        val imgFile = intent.getStringExtra("imgUrl")
 
         if (imgFile != null) {
             val bitmap = loadBitmap(imgFile)
             val myBitmap = BitmapFactory.decodeFile(imgFile)
-            iv_receipt.setImageBitmap(bitmap)
+            iv_show_img.setImageBitmap(bitmap)
         }
-
-        iv_receipt.setOnClickListener {
-            val intent = Intent(this, ShowImageActivity::class.java)
-            intent.putExtra("imgUrl", imgFile)
-            startActivity(intent)
-        }
-
     }
 
     fun loadBitmap(filePath: String): Bitmap {

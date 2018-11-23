@@ -48,4 +48,8 @@ open class ToolbarActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    protected fun useEdit() {
+        btn_edit.visibility = View.VISIBLE
+    }
 }

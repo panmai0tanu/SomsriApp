@@ -38,6 +38,8 @@ public class TesseractActivity extends ToolbarActivity {
     private String pathToDataFile;
     private Bitmap bitmap = null;
     private KProgressHUD loading = null;
+    private String languageProcess = null;
+    private File imgFile = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,54 +50,22 @@ public class TesseractActivity extends ToolbarActivity {
                 .setLabel(getString(R.string.loading))
                 .setDimAmount(0.5f);
 
+        languageProcess = getIntent().getStringExtra("languageProcess");
+
         int preference = 4;
-        startScan(preference,null);
+        startScan(preference);
     }
 
-    protected void startScan(int preference, String url) {
-        if (url == null) {
+    protected void startScan(int preference) {
             Intent intent = new Intent(this, ScanActivity.class);
             intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
             startActivityForResult(intent, REQUEST_CODE);
-        } else {
-            Intent intent = new Intent(this, ScanActivity.class);
-            intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
-            intent.putExtra("url", url);
-            startActivityForResult(intent, 1);
-            loading.dismiss();
-        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
-
-            AsyncTask.execute(() -> {
-                OutputStream os;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    getContentResolver().delete(uri, null, null);
-
-                    File photoFile = createImageFile();
-
-                    os = new FileOutputStream(photoFile);
-                    int imageWidth = bitmap.getWidth();
-                    int imageHeight = bitmap.getHeight();
-                    int newHeight = (imageHeight * 2000) / imageWidth;
-                    bitmap = Bitmap.createScaledBitmap(bitmap, 2000, newHeight, true);
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 10, os);
-
-                    startScan(4, photoFile.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    finish();
-                }
-            });
-            loading.show();
-
-        } else if (requestCode == 1 && resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
             AsyncTask.execute(() -> {
 
@@ -104,16 +74,16 @@ public class TesseractActivity extends ToolbarActivity {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                     getContentResolver().delete(uri, null, null);
 
-                    File photoFile = createImageFile();
+                    imgFile = createImageFile();
 
-                    os = new FileOutputStream(photoFile);
+                    os = new FileOutputStream(imgFile);
                     int imageWidth = bitmap.getWidth();
                     int imageHeight = bitmap.getHeight();
                     int newHeight = (imageHeight * 1000) / imageWidth;
                     bitmap = Bitmap.createScaledBitmap(bitmap, 1000, newHeight, true);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 10, os);
 
-                    prepareTessData();
+                    //prepareTessData();
                     startOCR(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -178,10 +148,12 @@ public class TesseractActivity extends ToolbarActivity {
     private void startOCR(Bitmap bitmap) {
         try {
 
-            String result = this.getText(bitmap);
+            //String result = this.getText(bitmap);
 
             Intent intent = new Intent(getBaseContext(), ResultActivity.class);
-            intent.putExtra("result", result);
+            //intent.putExtra("result", result);
+            intent.putExtra("languageProcess", languageProcess);
+            intent.putExtra("imgFile", imgFile.toString());
             startActivity(intent);
             loading.dismiss();
             finish();
@@ -197,7 +169,7 @@ public class TesseractActivity extends ToolbarActivity {
             Log.e(TAG, e.getMessage());
         }
         String dataPath = getExternalFilesDir("/").getPath() + "/";
-        tessBaseAPI.init(dataPath, "eng+tha");
+        tessBaseAPI.init(dataPath, languageProcess);
         tessBaseAPI.setImage(bitmap);
         String retStr = "No result";
         try {

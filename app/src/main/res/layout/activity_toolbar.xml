@@ -50,6 +50,16 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/btn_edit"
+            android:layout_width="25dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edit"
+            style="@style/cog"
+            android:visibility="invisible"
+            android:text="cog" />
+
     </RelativeLayout>
 
 
