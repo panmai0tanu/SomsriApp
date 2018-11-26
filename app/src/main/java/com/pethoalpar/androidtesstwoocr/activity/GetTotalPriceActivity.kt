@@ -18,11 +18,11 @@ class GetTotalPriceActivity : AppCompatActivity() {
         if (languageProcess == "eng") {
             var totalPriceStr = ""
             var line = 0
-//            for (char in result.reversed()) {
-//                if (char == '\n') line++
-//                if (line == 3) if (char != ' ') totalPriceStr += char else break
-//
-//            }
+            for (char in result.reversed()) {
+                if (char == '\n') line++
+                if (line == 3) if (char != ' ') totalPriceStr += char else break
+
+            }
             totalPriceStr = totalPriceStr.reversed()
 
             val resultIntent = Intent()

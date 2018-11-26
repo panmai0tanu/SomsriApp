@@ -29,6 +29,8 @@ class SelectReceiptFormActivity : ToolbarActivity() {
         initializeToolbar()
         useBack()
 
+        val edit = intent.getBooleanExtra("edit", false)
+
         loading = KProgressHUD.create(this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel(getString(R.string.loading))

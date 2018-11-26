@@ -28,8 +28,7 @@
             android:width="25dp"
             android:height="24dp"
             style="@style/cog"
-            android:visibility="invisible"
-            android:text="cog" />
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/btn_camera"
@@ -43,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:fontFamily="Mitr-Regular"
             android:lineSpacingMultiplier="1.22"
             android:text="Title"
             android:textColor="@color/white"
@@ -52,13 +50,13 @@
 
         <ImageView
             android:id="@+id/btn_edit"
-            android:layout_width="25dp"
-            android:layout_height="24dp"
+            android:layout_width="21dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/edit"
+            android:layout_marginTop="7dp"
             style="@style/cog"
-            android:visibility="invisible"
-            android:text="cog" />
+            android:visibility="invisible" />
 
     </RelativeLayout>
 

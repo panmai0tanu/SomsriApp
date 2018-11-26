@@ -148,10 +148,10 @@ public class TesseractActivity extends ToolbarActivity {
     private void startOCR(Bitmap bitmap) {
         try {
 
-            //String result = this.getText(bitmap);
+            String result = this.getText(bitmap);
 
             Intent intent = new Intent(getBaseContext(), ResultActivity.class);
-            //intent.putExtra("result", result);
+            intent.putExtra("result", result);
             intent.putExtra("languageProcess", languageProcess);
             intent.putExtra("imgFile", imgFile.toString());
             startActivity(intent);
