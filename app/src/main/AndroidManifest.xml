@@ -14,13 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.TesseractActivity" />
 
         <provider
@@ -33,6 +34,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".activity.GetData7_11Activity" />
         <activity android:name=".activity.GetData7Activity" />
         <activity android:name=".MainActivity" />
@@ -44,8 +46,6 @@
         <activity android:name=".activity.ShowDataActivity" />
         <activity android:name=".activity.DetailItemsActivity" />
         <activity android:name=".MainApp" />
-        <activity android:name=".adapter.ItemAdapter" />
-        <activity android:name=".adapter.DetailsItemAdapter"/>
     </application>
 
 </manifest>
