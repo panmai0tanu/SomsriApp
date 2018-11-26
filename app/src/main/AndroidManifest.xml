@@ -44,8 +44,6 @@
         <activity android:name=".activity.ShowDataActivity" />
         <activity android:name=".activity.DetailItemsActivity" />
         <activity android:name=".MainApp" />
-        <activity android:name=".adapter.ItemAdapter" />
-        <activity android:name=".adapter.DetailsItemAdapter"/>
     </application>
 
 </manifest>
