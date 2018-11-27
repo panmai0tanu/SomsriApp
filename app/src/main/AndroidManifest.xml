@@ -44,6 +44,7 @@
         <activity android:name=".activity.SelectReceiptFormActivity" />
         <activity android:name=".activity.ShowDataActivity" />
         <activity android:name=".activity.DetailItemsActivity" />
+        <activity android:name=".MainApp" />
     </application>
 
 </manifest>

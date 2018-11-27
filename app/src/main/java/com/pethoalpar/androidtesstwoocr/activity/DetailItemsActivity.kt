@@ -48,12 +48,10 @@ class DetailItemsActivity : ToolbarActivity() {
             Log.d("PANMAI", "++++" + itemDao.all().size.toString() + "++++")
             Log.d("PANMAI", itemDao.all().toString())
 
-            startActivity(Intent(this, ShowDataActivity::class.java))
             finish()
         }
 
         btn_delete_data.setOnClickListener {
-            startActivity(Intent(this, ShowDataActivity::class.java))
             finish()
         }
 

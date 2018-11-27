@@ -44,10 +44,6 @@ open class ResultActivity : ToolbarActivity() {
 
         runOnUiThread { loadingDialog = ProgressDialog.show(this, null, getString(R.string.loading), true, false) }
 
-        btn_scan.setOnClickListener {
-            finish()
-        }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
