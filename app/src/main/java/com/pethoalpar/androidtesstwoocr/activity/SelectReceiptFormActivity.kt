@@ -16,11 +16,12 @@ import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
 import kotlinx.android.synthetic.main.activity_select_receipt_form.*
+import javax.inject.Inject
 
 class SelectReceiptFormActivity : ToolbarActivity() {
-
-    private lateinit var loading: KProgressHUD
+    @Inject
     lateinit var itemDao: ItemDao
+    private lateinit var loading: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +42,6 @@ class SelectReceiptFormActivity : ToolbarActivity() {
         iv_sevenEleven.setOnClickListener {
             startActivity(intent)
             loading.show()
-        }
-
-        iv_other.setOnClickListener {
-            Log.d("PANMAI", itemDao.all().toString())
         }
 
     }

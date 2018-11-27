@@ -1,8 +1,11 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
+import android.content.Intent
 import android.os.Bundle
+import com.pethoalpar.androidtesstwoocr.LoginActivity
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
+import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : ToolbarActivity() {
 
@@ -12,5 +15,11 @@ class SettingActivity : ToolbarActivity() {
 
         initializeToolbar("Setting")
         useBack()
+
+        btn_logout.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
     }
 }

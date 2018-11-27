@@ -18,12 +18,14 @@ import com.pethoalpar.androidtesstwoocr.room.ItemDao
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 open class ResultActivity : ToolbarActivity() {
 
+    @Inject
+    lateinit var itemDao: ItemDao
     private lateinit var loadingDialog: ProgressDialog
     private val REQUEST_CODE = 1
-    lateinit var itemDao: ItemDao
     private var imgFile: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,10 +53,7 @@ open class ResultActivity : ToolbarActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
-            val totalCost = data!!.getStringExtra("totalCost").toDouble()
-            val item = constructorItem()
-            item.totalCost = totalCost
-            createItem(item)
+            val totalCost = data!!.getStringExtra("totalCost")
 
             val intent = Intent(this, DetailItemsActivity::class.java)
             intent.putExtra("totalCost", totalCost)
@@ -66,11 +65,5 @@ open class ResultActivity : ToolbarActivity() {
         loadingDialog.dismiss()
 
     }
-
-    private fun createItem(item: Item) {
-        itemDao.create(item)
-    }
-
-
 
 }

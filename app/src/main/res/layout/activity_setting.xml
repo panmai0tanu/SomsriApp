@@ -271,6 +271,7 @@
         android:background="@color/white">
 
         <RelativeLayout
+            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true">
@@ -300,18 +301,6 @@
                 android:height="21dp"
                 android:text="ออกจากระบบ " />
 
-            <TextView
-                android:id="@+id/tv_chevron_right_power_off"
-                style="@style/chevronRight"
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="25dp"
-                android:width="10dp"
-                android:height="18dp"
-                android:background="@drawable/chevron_right" />
         </RelativeLayout>
 
     </RelativeLayout>
