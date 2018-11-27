@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.adapter.ItemAdapter
@@ -20,6 +21,7 @@ class ShowDataActivity : ToolbarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_data)
+        MainApp.graph.inject(this)
         initializeToolbar(resources.getString(R.string.somsri_expense))
         useSetting()
 

@@ -99,6 +99,7 @@
         android:weightSum="1">
 
         <Button
+            android:id="@+id/btn_save_data"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
@@ -112,6 +113,7 @@
 
 
         <Button
+            android:id="@+id/btn_delete_data"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"

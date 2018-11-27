@@ -4,23 +4,29 @@ import android.Manifest
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
+import com.pethoalpar.androidtesstwoocr.room.ItemDao
 import kotlinx.android.synthetic.main.activity_select_receipt_form.*
+import javax.inject.Inject
 
 class SelectReceiptFormActivity : ToolbarActivity() {
-
+    @Inject
+    lateinit var itemDao: ItemDao
     private lateinit var loading: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_receipt_form)
+        MainApp.graph.inject(this)
         initializeToolbar()
         useBack()
 
@@ -36,10 +42,6 @@ class SelectReceiptFormActivity : ToolbarActivity() {
         iv_sevenEleven.setOnClickListener {
             startActivity(intent)
             loading.show()
-        }
-
-        iv_other.setOnClickListener {
-            startActivity(Intent(this, DetailItemsActivity::class.java))
         }
 
     }
