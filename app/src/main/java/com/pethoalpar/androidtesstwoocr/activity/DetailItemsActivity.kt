@@ -1,5 +1,6 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
+import android.arch.persistence.room.PrimaryKey
 import android.content.Intent
 import android.os.Bundle
 import com.pethoalpar.androidtesstwoocr.R
@@ -37,16 +38,17 @@ class DetailItemsActivity : ToolbarActivity() {
 
         btn_save_data.setOnClickListener {
 
-            val item = constructorItem()
-            item.itemId = (0..1000).random()
-            while (itemDao.findByItemId(item.itemId!!).isNotEmpty())
-                item.itemId = (0..1000).random()
+            var item: Item
+//            item.itemId = (0..1000).random()
+//            while (itemDao.findByItemId(item.itemId!!).isNotEmpty())
+//                item.itemId = (0..1000).random()
 
             item.totalCost = totalCost
+            item.detail = "000002"
             createItem(item)
 
             Log.d("PANMAI", "++++" + itemDao.all().size.toString() + "++++")
-            Log.d("PANMAI", itemDao.all().toString())
+            Log.d("PANMAI", itemDao.all().filter { it.detail == "000002" }.toString())
 
             finish()
         }

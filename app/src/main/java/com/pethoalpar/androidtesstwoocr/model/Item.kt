@@ -3,13 +3,12 @@ package com.pethoalpar.androidtesstwoocr.model
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import android.os.Parcelable
-import android.util.Log
 
 import java.util.*
 
 @Entity(tableName = "items")
 data class Item(
+
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "item_id") var itemId: Int?,
 
@@ -32,7 +31,7 @@ fun constructorItem(): Item {
 
     val date = getCurrentDateTime()
 
-    val item = Item(
+    return Item(
             0,
             "",
             "",
@@ -47,7 +46,6 @@ fun constructorItem(): Item {
             "",
             0.00,
             date.toString())
-    return item
 }
 
 fun getCurrentDateTime(): Date {
