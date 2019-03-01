@@ -1,18 +1,17 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
-import android.content.Intent
-import android.os.Bundle
-import com.pethoalpar.androidtesstwoocr.R
-import com.pethoalpar.androidtesstwoocr.ToolbarActivity
-import kotlinx.android.synthetic.main.activity_detail_items.*
-import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Bundle
 import android.util.Log
 import com.pethoalpar.androidtesstwoocr.MainApp
+import com.pethoalpar.androidtesstwoocr.R
+import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.model.Item
 import com.pethoalpar.androidtesstwoocr.model.constructorItem
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
-import kotlinx.android.synthetic.main.activity_select_receipt_form.*
+import kotlinx.android.synthetic.main.activity_detail_items.*
+import org.jetbrains.anko.toast
 import java.util.*
 import javax.inject.Inject
 
@@ -42,7 +41,6 @@ class DetailItemsActivity : ToolbarActivity() {
             while (itemDao.findByItemId(item.itemId!!).isNotEmpty())
                 item.itemId = (0..1000).random()
 
-            item.totalCost = totalCost
             createItem(item)
 
             Log.d("PANMAI", "++++" + itemDao.all().size.toString() + "++++")
@@ -78,6 +76,7 @@ class DetailItemsActivity : ToolbarActivity() {
     }
 
     private fun createItem(item: Item) {
+        item.totalCost = et_total_cost.text.toString().toDouble()
         itemDao.create(item)
     }
 

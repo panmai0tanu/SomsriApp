@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import com.pethoalpar.androidtesstwoocr.R
+import com.pethoalpar.androidtesstwoocr.model.Item
 import kotlinx.android.synthetic.main.list_item.view.*
 
 
-class ItemAdapter(private val context: Context, private val items: List<String>) : RecyclerView.Adapter<ItemViewHolder>() {
+class ItemAdapter(private val context: Context, private val titleNames: ArrayList<String>, private val costs: ArrayList<Double>) : RecyclerView.Adapter<ItemViewHolder>() {
     override fun getItemCount(): Int {
-        return items.size
+        return titleNames.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -20,8 +21,10 @@ class ItemAdapter(private val context: Context, private val items: List<String>)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = items[position]
-        holder.tvItemName.text = item
+        val titleName = titleNames[position]
+        val cost = costs[position]
+        holder.tvItemName.text = titleName
+        holder.totalCostOfDay.text = cost.toString()
 
         val listItemName = ArrayList<String>()
         listItemName.add("รายการซื้อของที่เซเว่น")
@@ -51,4 +54,5 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val rvDetailItem = view.rv_details_item!!
     val layourDetailsItem = view.details_item_layout!!
     val angleRight = view.iv_angle!!
+    val totalCostOfDay = view.tv_total_cost_of_day
 }

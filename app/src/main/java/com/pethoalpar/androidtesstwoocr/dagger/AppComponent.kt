@@ -18,7 +18,7 @@ interface AppComponent {
     fun inject(selectReceiptFormActivity: SelectReceiptFormActivity)
     fun inject(detailItemsActivity: DetailItemsActivity)
     fun inject(getData7_11Activity: GetData7_11Activity)
-    fun inhect(getData7Activity: GetData7Activity)
+    fun inject(getData7Activity: GetData7Activity)
     fun inject(getTotalPriceActivity: GetTotalPriceActivity)
     fun inject(mainActivity: MainActivity)
     fun inject(settingActivity: SettingActivity)
