@@ -54,14 +54,17 @@ class ShowDataActivity : ToolbarActivity() {
 
         var x = 0
         var sumTotal = 0.00
-        val thisDate = item.first().effectiveDate.split(" ")
+        var thisDate = item.first().effectiveDate.split(" ")
+        var dateArr: List<String>
         for (i in item) {
 
-            val dateArr = i.effectiveDate.split(" ")
+            dateArr = i.effectiveDate.split(" ")
+
             if (dateArr[1] == thisDate [1] && dateArr[2] == thisDate[2] && dateArr[5] == dateArr[5]) {
             } else {
                 listItemName.add("ค่าใช้จ่ายวันที่ $x")
                 listItemCost.add(sumTotal)
+                thisDate = dateArr
                 yVals.add(BarEntry(x.toFloat(), sumTotal.toFloat()))
                 color.add(x, resources.getColor(R.color.chart))
                 x++
