@@ -59,6 +59,7 @@
                 android:text="THB" />
 
             <TextView
+                android:id="@+id/tv_total_cost_of_day"
                 style="@style/int_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
