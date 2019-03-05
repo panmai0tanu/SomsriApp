@@ -45,6 +45,7 @@
         <activity android:name=".activity.ShowDataActivity" />
         <activity android:name=".activity.DetailItemsActivity" />
         <activity android:name=".MainApp" />
+        <activity android:name=".activity.SignUpActivity" />
     </application>
 
 </manifest>

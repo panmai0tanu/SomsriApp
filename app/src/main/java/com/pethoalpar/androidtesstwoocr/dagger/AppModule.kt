@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
+import com.pethoalpar.androidtesstwoocr.room.UserDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -30,5 +31,9 @@ class AppModule(private val mainApp: MainApp) {
     @Provides
     @Singleton
     fun providesItemDao(database: AppDatabase): ItemDao = database.itemDao()
+
+    @Provides
+    @Singleton
+    fun providesUserDao(database: AppDatabase): UserDao = database.userDao()
 
 }

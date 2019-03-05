@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pethoalpar.androidtesstwoocr.activity.ShowDataActivity
+import com.pethoalpar.androidtesstwoocr.activity.SignUpActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -15,6 +16,10 @@ class LoginActivity : AppCompatActivity() {
 
         tv_login.setOnClickListener {
             startActivity(Intent(this, ShowDataActivity::class.java))
+        }
+
+        tv_sign_up.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
 

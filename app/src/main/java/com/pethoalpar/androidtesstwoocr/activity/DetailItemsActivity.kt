@@ -45,9 +45,6 @@ class DetailItemsActivity : ToolbarActivity() {
             item.totalCost = totalCost
             createItem(item)
 
-            Log.d("PANMAI", "++++" + itemDao.all().size.toString() + "++++")
-            Log.d("PANMAI", itemDao.all().toString())
-
             finish()
         }
 
