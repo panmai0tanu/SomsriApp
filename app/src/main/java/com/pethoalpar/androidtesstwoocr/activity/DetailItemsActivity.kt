@@ -8,8 +8,12 @@ import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.model.Item
+import com.pethoalpar.androidtesstwoocr.model.constructorDetailItem
 import com.pethoalpar.androidtesstwoocr.model.constructorItem
+import com.pethoalpar.androidtesstwoocr.model.constructorLineItem
+import com.pethoalpar.androidtesstwoocr.room.DetailItemDao
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
+import com.pethoalpar.androidtesstwoocr.room.LineItemDao
 import kotlinx.android.synthetic.main.activity_detail_items.*
 import org.jetbrains.anko.toast
 import java.util.*
@@ -20,6 +24,12 @@ class DetailItemsActivity : ToolbarActivity() {
 
     @Inject
     lateinit var itemDao: ItemDao
+
+    @Inject
+    lateinit var lineItemDao: LineItemDao
+
+    @Inject
+    lateinit var detailItemDao: DetailItemDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +52,20 @@ class DetailItemsActivity : ToolbarActivity() {
                 item.itemId = (0..1000).random()
 
             createItem(item)
+
+            val lineItem = constructorLineItem()
+            lineItem.itemId = item.itemId
+            lineItem.lineItemId = (0..1000).random()
+            while (lineItemDao.findByLineItemId(lineItem.lineItemId!!).isNotEmpty())
+                lineItem.lineItemId = (0..1000).random()
+
+            //add amount and cost line item
+
+            val detailItem = constructorDetailItem()
+            detailItem.lineItemId = lineItem.lineItemId
+            detailItem.detailItemId = (0..1000).random()
+            while (detailItemDao.findByDetailItemId(detailItem.detailItemId!!).isNotEmpty())
+                detailItem.detailItemId = (0..1000).random()
 
             finish()
         }
