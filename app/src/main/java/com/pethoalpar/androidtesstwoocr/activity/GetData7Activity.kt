@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
-class GetData7Activity : AppCompatActivity() {
+class qGetData7Activity : AppCompatActivity() {
 
     private var result = ""
     private var itemStr = ""
