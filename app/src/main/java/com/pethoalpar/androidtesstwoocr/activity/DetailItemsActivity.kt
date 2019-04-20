@@ -1,11 +1,13 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
+import com.pethoalpar.androidtesstwoocr.R.color.white
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.model.Item
 import com.pethoalpar.androidtesstwoocr.model.constructorItem
@@ -21,6 +23,7 @@ class DetailItemsActivity : ToolbarActivity() {
     @Inject
     lateinit var itemDao: ItemDao
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_items)
@@ -30,7 +33,7 @@ class DetailItemsActivity : ToolbarActivity() {
 
         val totalCostString = intent.getStringExtra("totalCost")
         val imgFile = intent.getStringExtra("imgFile")
-        val totalCost = intOrString(totalCostString)
+        val totalCost = if (!totalCostString.isNullOrEmpty()) intOrString(totalCostString) else 0
 
         et_total_cost.setText(totalCost.toString())
 
@@ -53,6 +56,8 @@ class DetailItemsActivity : ToolbarActivity() {
 
         if (imgFile != null) {
             val bitmap = loadBitmap(imgFile)
+//            iv_receipt.setBackgroundColor(R.color.white)
+//            iv_receipt.setColorFilter(R.color.white)
             iv_receipt.setImageBitmap(bitmap)
         }
 

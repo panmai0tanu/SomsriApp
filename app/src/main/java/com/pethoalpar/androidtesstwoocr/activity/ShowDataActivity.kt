@@ -50,47 +50,49 @@ class ShowDataActivity : ToolbarActivity() {
         val listItemCost = ArrayList<Double>()
 
 
-        val item = itemDao.all().sortedBy { it.effectiveDate }
+        if (itemDao.all().isNotEmpty()) {
+            val item = itemDao.all().sortedBy { it.effectiveDate }
 
-        var x = 0
-        var sumTotal = 0.00
-        var thisDate = item.first().effectiveDate.split(" ")
-        var dateArr: List<String>
-        for (i in item) {
+            var x = 0
+            var sumTotal = 0.00
+            var thisDate = item.first().effectiveDate.split(" ")
+            var dateArr: List<String>
+            for (i in item) {
 
-            dateArr = i.effectiveDate.split(" ")
+                dateArr = i.effectiveDate.split(" ")
 
-            if (dateArr[1] == thisDate [1] && dateArr[2] == thisDate[2] && dateArr[5] == dateArr[5]) {
-            } else {
-                listItemName.add("ค่าใช้จ่ายวันที่ $x")
-                listItemCost.add(sumTotal)
-                thisDate = dateArr
-                yVals.add(BarEntry(x.toFloat(), sumTotal.toFloat()))
-                color.add(x, resources.getColor(R.color.chart))
-                x++
-                sumTotal = 0.00
+                if (dateArr[1] == thisDate[1] && dateArr[2] == thisDate[2] && dateArr[5] == dateArr[5]) {
+                } else {
+                    listItemName.add("ค่าใช้จ่ายวันที่ $x")
+                    listItemCost.add(sumTotal)
+                    thisDate = dateArr
+                    yVals.add(BarEntry(x.toFloat(), sumTotal.toFloat()))
+                    color.add(x, resources.getColor(R.color.chart))
+                    x++
+                    sumTotal = 0.00
+                }
+
+                sumTotal += i.totalCost
+
             }
 
-            sumTotal += i.totalCost
+            listItemName.add("ค่าใช้จ่ายวันที่ $x")
+            listItemCost.add(sumTotal)
+            yVals.add(BarEntry(x.toFloat(), sumTotal.toFloat()))
+            color.add(x, resources.getColor(R.color.chart))
 
+            val set = BarDataSet(yVals, null)
+            set.colors = color
+            set.setDrawValues(true)
+
+            val data = BarData(set)
+
+            chart.data = data
+            chart.animateY(500)
+
+            rv_item.layoutManager = LinearLayoutManager(this)
+            rv_item.adapter = ItemAdapter(this, listItemName, listItemCost)
         }
-
-        listItemName.add("ค่าใช้จ่ายวันที่ $x")
-        listItemCost.add(sumTotal)
-        yVals.add(BarEntry(x.toFloat(), sumTotal.toFloat()))
-        color.add(x, resources.getColor(R.color.chart))
-
-        val set = BarDataSet(yVals, null)
-        set.colors = color
-        set.setDrawValues(true)
-
-        val data = BarData(set)
-
-        chart.data = data
-        chart.animateY(500)
-
-        rv_item.layoutManager = LinearLayoutManager(this)
-        rv_item.adapter = ItemAdapter(this, listItemName, listItemCost)
 
     }
 
