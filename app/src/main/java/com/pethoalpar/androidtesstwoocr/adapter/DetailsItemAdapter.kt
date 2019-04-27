@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import com.pethoalpar.androidtesstwoocr.R
+import com.pethoalpar.androidtesstwoocr.model.Item
+import kotlinx.android.synthetic.main.activity_detail_items.view.*
 import kotlinx.android.synthetic.main.details_list_item.view.*
 
 
-class DetailsItemAdapter(private val context: Context, private val items: List<String>) : RecyclerView.Adapter<DetailsItemViewHolder>() {
+class DetailsItemAdapter(private val context: Context, private val items: List<Item>) : RecyclerView.Adapter<DetailsItemViewHolder>() {
     override fun getItemCount(): Int {
         return items.size
     }
@@ -20,7 +22,8 @@ class DetailsItemAdapter(private val context: Context, private val items: List<S
 
     override fun onBindViewHolder(holder: DetailsItemViewHolder, position: Int) {
         val item = items[position]
-        holder.btnItem.text = item
+        holder.btnItem.text = item.detail
+        holder.btnCost.text = item.totalCost.toString()
 
         holder.btnItem.setOnClickListener {
 
@@ -32,4 +35,5 @@ class DetailsItemAdapter(private val context: Context, private val items: List<S
 
 class DetailsItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val btnItem = view.tv_details_item!!
+    val btnCost = view.detail_item_cost
 }

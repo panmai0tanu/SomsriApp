@@ -12,6 +12,9 @@ interface ItemDao {
     @Query("select * from items where item_id = :itemId")
     fun findByItemId(itemId: Int): List<Item>
 
+    @Query("select * from items where item_id = :itemId")
+    fun findItem(itemId: Int): Item
+
     @Insert(onConflict = REPLACE)
     fun create(item: Item)
 

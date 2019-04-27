@@ -5,6 +5,8 @@ import com.pethoalpar.androidtesstwoocr.MainActivity
 import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.activity.*
+import com.pethoalpar.androidtesstwoocr.adapter.DetailsItemAdapter
+import com.pethoalpar.androidtesstwoocr.adapter.ItemAdapter
 import dagger.Component
 import javax.inject.Singleton
 
@@ -27,5 +29,6 @@ interface AppComponent {
     fun inject(tesseractFileProvider: TesseractFileProvider)
     fun inject(loginActivity: LoginActivity)
     fun inject(signUpActivity: SignUpActivity)
+    fun inject(itemAdapter: ItemAdapter)
 
 }
