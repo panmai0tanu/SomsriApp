@@ -1,9 +1,11 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.View
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -11,10 +13,12 @@ import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.adapter.ItemAdapter
+import com.pethoalpar.androidtesstwoocr.model.getCurrentDateTime
+import com.pethoalpar.androidtesstwoocr.model.getIntDate
+import com.pethoalpar.androidtesstwoocr.model.getMonthName
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
 import kotlinx.android.synthetic.main.activity_show_data.*
 import kotlinx.android.synthetic.main.activity_toolbar.*
-import org.jetbrains.anko.toast
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -25,6 +29,13 @@ class ShowDataActivity : ToolbarActivity() {
     @Inject
     lateinit var itemDao: ItemDao
 
+    private var thisMonth = getCurrentDateTime().split("/")[1]
+    private var thisYear = getCurrentDateTime().split("/")[2]
+    private val originMonth = thisMonth
+    private val originYear = thisYear
+
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_data)
@@ -41,45 +52,108 @@ class ShowDataActivity : ToolbarActivity() {
             startActivity(Intent(this, SettingActivity::class.java))
         }
 
+        tv_month_bar.text = "${getMonthName(thisMonth)} ${(thisYear.toInt() + 543)}"
+
+        btn_chev_left.setOnClickListener {
+
+            if (thisMonth == "01") {
+                thisYear = (thisYear.toInt() - 1).toString()
+                thisMonth = "12"
+            } else {
+                thisMonth = (thisMonth.toInt() - 1).toString()
+                if (thisMonth.count() == 1)
+                    thisMonth = "0$thisMonth"
+            }
+            btn_chev_right.visibility = View.VISIBLE
+
+            setdata()
+            chart.setFitBars(true)
+            chart.description = null
+        }
+
+        btn_chev_right.setOnClickListener {
+            if (thisYear == originYear) {
+                if (thisMonth.toInt() < originMonth.toInt()) {
+                    if (thisMonth == "12") {
+                        thisYear = (thisYear.toInt() + 1).toString()
+                        thisMonth = "01"
+                    } else {
+                        thisMonth = (thisMonth.toInt() + 1).toString()
+                        if (thisMonth.count() == 1)
+                            thisMonth = "0$thisMonth"
+                    }
+                }
+
+                if (thisMonth == originMonth) btn_chev_right.visibility = View.GONE
+            } else if (thisYear.toInt() < originYear.toInt()) {
+                if (thisMonth == "12") {
+                    thisYear = (thisYear.toInt() + 1).toString()
+                    thisMonth = "01"
+                } else {
+                    thisMonth = (thisMonth.toInt() + 1).toString()
+                    if (thisMonth.count() == 1)
+                        thisMonth = "0$thisMonth"
+                }
+            }
+
+            setdata()
+            chart.setFitBars(true)
+            chart.description = null
+        }
+
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setdata() {
+
+        tv_month_bar.text = "${getMonthName(thisMonth)} ${(thisYear.toInt() + 543)}"
+
         val yVals: ArrayList<BarEntry> = ArrayList()
         val color: MutableList<Int> = ArrayList()
-        val listItemName = ArrayList<String>()
         val listItemCost = ArrayList<Double>()
+        val listItemName = ArrayList<String>()
 
+        var item = itemDao.all()
+        item = item.filter {
+            it.effectiveDate.split("/")[1] == thisMonth &&
+                    it.effectiveDate.split("/")[2] == thisYear
+        }
 
-        if (itemDao.all().isNotEmpty()) {
-            val item = itemDao.all().sortedBy { it.effectiveDate }
+        var totalCost = 0.00
 
-            var x = 0
+        if (item.isNotEmpty()) {
+
+            item = item.sortedBy { it.effectiveDate }.reversed()
+
             var sumTotal = 0.00
-            var thisDate = item.first().effectiveDate.split(" ")
-            var dateArr: List<String>
+            var count = 0
+            var thisDate = item.first().effectiveDate
+            var dateArr: String
+
             for (i in item) {
+                totalCost += i.totalCost
+                dateArr = i.effectiveDate
 
-                dateArr = i.effectiveDate.split(" ")
-
-                if (dateArr[1] == thisDate[1] && dateArr[2] == thisDate[2] && dateArr[5] == dateArr[5]) {
+                if (dateArr == thisDate) {
                 } else {
-                    listItemName.add("ค่าใช้จ่ายวันที่ $x")
+                    listItemName.add(thisDate)
                     listItemCost.add(sumTotal)
                     thisDate = dateArr
-                    yVals.add(BarEntry(x.toFloat(), sumTotal.toFloat()))
-                    color.add(x, resources.getColor(R.color.chart))
-                    x++
+
+                    yVals.add(BarEntry(count.toFloat(), sumTotal.toFloat()))
+                    color.add(count, resources.getColor(R.color.chart))
                     sumTotal = 0.00
+                    count++
                 }
 
                 sumTotal += i.totalCost
 
             }
 
-            listItemName.add("ค่าใช้จ่ายวันที่ $x")
+            listItemName.add(thisDate)
             listItemCost.add(sumTotal)
-            yVals.add(BarEntry(x.toFloat(), sumTotal.toFloat()))
-            color.add(x, resources.getColor(R.color.chart))
+            yVals.add(BarEntry(count.toFloat(), sumTotal.toFloat()))
+            color.add(count, resources.getColor(R.color.chart))
 
             val set = BarDataSet(yVals, null)
             set.colors = color
@@ -91,9 +165,18 @@ class ShowDataActivity : ToolbarActivity() {
             chart.animateY(500)
 
             rv_item.layoutManager = LinearLayoutManager(this)
-            rv_item.adapter = ItemAdapter(this, listItemName, listItemCost)
+            rv_item.adapter = ItemAdapter(this, listItemName, listItemCost, item)
+        } else {
+            listItemName.clear()
+            listItemCost.clear()
+
+            chart.clear()
+
+            rv_item.layoutManager = LinearLayoutManager(this)
+            rv_item.adapter = ItemAdapter(this, listItemName, listItemCost, item)
         }
 
+        tv_total_cost.text = totalCost.toString()
     }
 
     override fun onResume() {
@@ -103,5 +186,4 @@ class ShowDataActivity : ToolbarActivity() {
         chart.description = null
 
     }
-
 }
