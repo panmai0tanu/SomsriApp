@@ -2,10 +2,12 @@ package com.pethoalpar.androidtesstwoocr.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -103,7 +105,8 @@ class ShowDataActivity : ToolbarActivity() {
 
     }
 
-    @SuppressLint("SetTextI18n")
+    @RequiresApi(Build.VERSION_CODES.N)
+    @SuppressLint("SetTextI18n", "ResourceAsColor")
     private fun setdata() {
 
         tv_month_bar.text = "${getMonthName(thisMonth)} ${(thisYear.toInt() + 543)}"
@@ -152,8 +155,14 @@ class ShowDataActivity : ToolbarActivity() {
 
             listItemName.add(thisDate)
             listItemCost.add(sumTotal)
+
             yVals.add(BarEntry(count.toFloat(), sumTotal.toFloat()))
             color.add(count, resources.getColor(R.color.chart))
+            
+            chart.run {
+                setTouchEnabled(false)
+                setDrawBarShadow(false)
+            }
 
             val set = BarDataSet(yVals, null)
             set.colors = color
@@ -182,7 +191,7 @@ class ShowDataActivity : ToolbarActivity() {
     override fun onResume() {
         super.onResume()
         setdata()
-        chart.setFitBars(true)
+        chart.setFitBars(false)
         chart.description = null
 
     }
