@@ -158,7 +158,7 @@ class ShowDataActivity : ToolbarActivity() {
 
             yVals.add(BarEntry(count.toFloat(), sumTotal.toFloat()))
             color.add(count, resources.getColor(R.color.chart))
-            
+
             chart.run {
                 setTouchEnabled(false)
                 setDrawBarShadow(false)

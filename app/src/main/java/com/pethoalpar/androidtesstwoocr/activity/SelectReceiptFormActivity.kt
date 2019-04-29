@@ -16,6 +16,7 @@ import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
 import kotlinx.android.synthetic.main.activity_select_receipt_form.*
+import kotlinx.android.synthetic.main.activity_toolbar.*
 import javax.inject.Inject
 
 class SelectReceiptFormActivity : ToolbarActivity() {
@@ -29,6 +30,7 @@ class SelectReceiptFormActivity : ToolbarActivity() {
         MainApp.graph.inject(this)
         initializeToolbar()
         useBack()
+        tv_title.text = "เลือกรูปแบบใบเสร็จ"
 
         loading = KProgressHUD.create(this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
