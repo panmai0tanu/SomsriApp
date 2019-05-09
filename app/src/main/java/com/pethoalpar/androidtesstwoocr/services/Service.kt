@@ -11,6 +11,6 @@ open class Service {
         MainApp.graph.inject(this)
     }
 
-    fun getSomsriAccount() = apiService.getUser("xx", "xx")
+    fun getSomsriAccount() = apiService.getUser("test@test.com", "xx")
 
 }

@@ -38,9 +38,9 @@ class SignUpActivity : ToolbarActivity() {
 
             if (validatePassword() && isValidEmail(email)) {
                 val user = constructorUser()
-                while (userDao.findByUserId(user.userId!!).isNotEmpty())
-                    user.userId = (0..1000).random()
-                user.userEmail = email
+                while (userDao.findByUserId(user.id!!).isNotEmpty())
+                    user.id = (0..1000).random()
+                user.email = email
                 user.password = pass
 
                 userDao.create(user)

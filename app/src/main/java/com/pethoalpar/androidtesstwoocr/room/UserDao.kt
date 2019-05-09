@@ -10,8 +10,8 @@ interface UserDao {
     @Query("select * from users")
     fun all(): List<User>
 
-    @Query("select * from users where user_id = :userId")
-    fun findByUserId(userId: Int): List<User>
+    @Query("select * from users where id = :id")
+    fun findByUserId(id: Int): List<User>
 
     @Insert(onConflict = REPLACE)
     fun create(user: User)

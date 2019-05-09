@@ -3,7 +3,7 @@ package com.pethoalpar.androidtesstwoocr.activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.google.gson.annotations.SerializedName
+
 import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.services.Service
@@ -28,7 +28,7 @@ class SomsriConnectActivity : AppCompatActivity() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                Log.d("PANMAI", it.password)
+                Log.d("PANMAI", it.user.toString())
             }, { error ->
                 Log.d("PANMAI", error.message)
             })

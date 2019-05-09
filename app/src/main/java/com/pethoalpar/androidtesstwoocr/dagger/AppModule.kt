@@ -50,7 +50,7 @@ class AppModule(private val mainApp: MainApp) {
                 .build()
 
         return Retrofit.Builder()
-                .baseUrl("https://somsriapp.herokuapp.com/user_api/")
+                .baseUrl("https://somsriapp.herokuapp.com/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
