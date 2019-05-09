@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.R.color.white
@@ -42,9 +43,10 @@ class DetailItemsActivity : ToolbarActivity() {
 
         val totalCostString = intent.getStringExtra("totalCost")
         val imgFile = intent.getStringExtra("imgFile")
+        val checkItem = intent.getStringExtra("item")
+        val date = intent.getStringExtra("date")
+        val receiptNumber = intent.getStringExtra("receiptNumber")
         val totalCost = if (!totalCostString.isNullOrEmpty()) intOrString(totalCostString) else 0
-
-        et_total_cost.setText(totalCost.toString())
 
         btn_save_data.setOnClickListener {
 
@@ -74,6 +76,22 @@ class DetailItemsActivity : ToolbarActivity() {
 
         btn_delete_data.setOnClickListener {
             finish()
+        }
+
+        Log.d("PANMAI", totalCost.toString() + ',' + receiptNumber + ',' + date )
+        iv_angle_down.setOnClickListener {
+            if (checkItem != "") {
+                et_reciept_id.setText(receiptNumber)
+                et_total_cost.setText(totalCost.toString())
+                et_date.setText(date)
+
+                if (detail_item.visibility == View.GONE) {
+                    detail_item.visibility = View.VISIBLE
+                    et_reciept_id.setText(receiptNumber)
+                } else {
+                    detail_item.visibility = View.GONE
+                }
+            }
         }
 
 

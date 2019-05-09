@@ -40,6 +40,7 @@ public class TesseractActivity extends ToolbarActivity {
     private KProgressHUD loading = null;
     private String languageProcess = null;
     private File imgFile = null;
+    private String receiptForm = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class TesseractActivity extends ToolbarActivity {
                 .setDimAmount(0.5f);
 
         languageProcess = getIntent().getStringExtra("languageProcess");
+        receiptForm = getIntent().getStringExtra("receiptForm");
 
         int preference = 4;
         startScan(preference);
@@ -153,6 +155,7 @@ public class TesseractActivity extends ToolbarActivity {
             Intent intent = new Intent(getBaseContext(), ResultActivity.class);
             intent.putExtra("result", result);
             intent.putExtra("languageProcess", languageProcess);
+            intent.putExtra("receiptForm", receiptForm);
             intent.putExtra("imgFile", imgFile.toString());
             startActivity(intent);
             loading.dismiss();

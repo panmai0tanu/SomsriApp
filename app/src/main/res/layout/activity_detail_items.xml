@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:text="ยอดรวมทั้งหมด"
             android:textSize="18sp" />
@@ -38,6 +38,114 @@
             android:layout_marginTop="10dp"
             android:text="THB"
             android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_angle_down"
+            style="@style/angleDown"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/angle_down_green" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="เลขที่ใบเสร็จ"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text=":"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/et_reciept_id"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="รายละเอียด"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:text=":"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/et_detail"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="วันที่"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="71dp"
+                android:text=":"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 

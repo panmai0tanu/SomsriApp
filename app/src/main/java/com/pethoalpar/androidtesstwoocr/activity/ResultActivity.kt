@@ -35,12 +35,15 @@ open class ResultActivity : ToolbarActivity() {
 
         val result = intent.getStringExtra("result")
         val languageProcess = intent.getStringExtra("languageProcess")
+        val receiptForm = intent.getStringExtra("receiptForm")
         imgFile = intent.getStringExtra("imgFile")
 
-        val intent = (Intent(this, GetTotalPriceActivity::class.java))
-        intent.putExtra("result", result)
-        intent.putExtra("languageProcess", languageProcess)
-        startActivityForResult(intent, REQUEST_CODE)
+        if (receiptForm == "7eleven"){
+            val intent = (Intent(this, GetData7Activity::class.java))
+            intent.putExtra("result", result)
+            intent.putExtra("languageProcess", languageProcess)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
 
         runOnUiThread { loadingDialog = ProgressDialog.show(this, null, getString(R.string.loading), true, false) }
 
@@ -50,10 +53,15 @@ open class ResultActivity : ToolbarActivity() {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
             val totalCost = data!!.getStringExtra("totalCost")
+            val date = data.getStringExtra("date")
+            val receiptNumber = data.getStringExtra("receiptNumber")
+
 
             val intent = Intent(this, DetailItemsActivity::class.java)
             intent.putExtra("totalCost", totalCost)
             intent.putExtra("imgFile", imgFile)
+            intent.putExtra("receiptNumber", date)
+            intent.putExtra("receiptNumber", receiptNumber)
             startActivity(intent)
             finish()
         }

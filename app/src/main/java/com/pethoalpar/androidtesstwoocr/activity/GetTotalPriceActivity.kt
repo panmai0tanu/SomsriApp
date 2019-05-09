@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import org.jetbrains.anko.toast
 
 class GetTotalPriceActivity : AppCompatActivity() {
 
@@ -14,6 +15,8 @@ class GetTotalPriceActivity : AppCompatActivity() {
 
         val result = intent.getStringExtra("result")
         languageProcess = intent.getStringExtra("languageProcess")
+
+        toast("Hello")
 
         if (languageProcess == "eng") {
             var totalPriceStr = ""
