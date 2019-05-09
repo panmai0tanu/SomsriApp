@@ -21,5 +21,10 @@ class SettingActivity : ToolbarActivity() {
             finish()
         }
 
+        somsri_connect.setOnClickListener {
+            startActivity(Intent(this, SomsriConnectActivity::class.java))
+            finish()
+        }
+
     }
 }
