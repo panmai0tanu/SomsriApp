@@ -1,6 +1,24 @@
 <resources>
-    <string name="app_name">AndroidTessTwoOCR</string>
+    <string name="app_name">Somsri Expense</string>
     <string name="title_activity_mainn">MainnActivity</string>
     <string name="loading">Loading</string>
     <string name="somsri_expense">Somsri Expense</string>
+    <string name="app_name_detail">
+        <b>Somsri Expense แอปพลิเคชันบันทึกรายรับรายจ่าย</b>
+    </string>
+    <string name="about_app">
+        \t\tSomsri Expense เป็นแอปพลิเคชันที่ใช้สำหรับ\n
+        บันทึกรายรับ-รายจ่ายโดยออกแบบมา\n
+        เพื่อให้เกิดความสะดวกสบายแก่ผู้ใช้ด้วยการ\n
+        สร้างฟังก์ชันการบันทึกข้อมูลด้วยการใช้รูปภาพ\n
+        ที่จะนำรูปภาพไปประมวลผลเพื่อให้ได้มา\n
+        ซึ่งข้อมูลของรายการรายรับหรือค่าใช้จ่าย\n
+        แล้วทำการเก็บข้อมูลในระบบฐานข้อมูล\n
+        ในการแสดงผลข้อมูล จะมีการนำเสนอข้อมูล\n
+        รายรับ-รายจ่ายประจำเดือนโดยแสดงผล\n
+        ในรูปแบบกราฟแท่งและรายการรายรับ-รายจ่าย\n
+        และมีฟังก์ชันสำหรับการส่งข้อมูลไปยัง\n
+        โปรแกรมอื่นๆ เพื่อการจัดเก็บข้อมูลหรือ\n
+        นำข้อมูลไปใช้ประโยชน์\n
+    </string>
 </resources>

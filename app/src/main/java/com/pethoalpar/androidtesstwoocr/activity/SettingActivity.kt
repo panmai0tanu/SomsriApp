@@ -21,5 +21,9 @@ class SettingActivity : ToolbarActivity() {
             finish()
         }
 
+        layout_about.setOnClickListener {
+            startActivity(Intent(this,AbountAppActivity::class.java))
+        }
+
     }
 }

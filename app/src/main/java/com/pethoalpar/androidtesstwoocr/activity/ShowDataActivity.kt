@@ -15,12 +15,11 @@ import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.adapter.ItemAdapter
-import com.pethoalpar.androidtesstwoocr.model.getCurrentDateTime
-import com.pethoalpar.androidtesstwoocr.model.getIntDate
-import com.pethoalpar.androidtesstwoocr.model.getMonthName
+import com.pethoalpar.androidtesstwoocr.model.*
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
 import kotlinx.android.synthetic.main.activity_show_data.*
 import kotlinx.android.synthetic.main.activity_toolbar.*
+import org.jetbrains.anko.toast
 import java.lang.Math.random
 import java.util.*
 import javax.inject.Inject
@@ -50,13 +49,35 @@ class ShowDataActivity : ToolbarActivity() {
 
         new_item.setOnClickListener {
             startActivity(Intent(this, SelectReceiptFormActivity::class.java))
+//            var i = 1
+//            var newItem: Item
+//            while (i < 32){
+//                if (i == 31)
+//                    toast("Success!!!")
+//                else {
+//                    newItem = constructorItem()
+//                    newItem.receiptNumber = "R#000123" + (0..1000).random().toString()
+//
+//                    if (i.toString().length == 1)
+//                        newItem.effectiveDate = "0" + i.toString() + "/04/2562"
+//                    else
+//                        newItem.effectiveDate = i.toString() + "/04/2562"
+//                    newItem.detail = "ซื้อของใช้ทั่วไป"
+//                    newItem.totalCost = (50..200).random2().toDouble()
+//
+//                    itemDao.create(newItem)
+//                }
+//
+//                i++
+//
+//            }
         }
 
         btn_setting.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
         }
 
-        tv_month_bar.text = "${getMonthName(thisMonth)} ${(thisYear.toInt() + 543)}"
+        tv_month_bar.text = "${getMonthName(thisMonth)} ${(thisYear)}"
 
         btn_chev_left.setOnClickListener {
 
@@ -111,7 +132,7 @@ class ShowDataActivity : ToolbarActivity() {
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     private fun setdata() {
 
-        tv_month_bar.text = "${getMonthName(thisMonth)} ${(thisYear.toInt() + 543)}"
+        tv_month_bar.text = "${getMonthName(thisMonth)} ${(thisYear.toInt())}"
 
         val yVals: ArrayList<BarEntry> = ArrayList()
         val color: MutableList<Int> = ArrayList()
@@ -120,13 +141,13 @@ class ShowDataActivity : ToolbarActivity() {
 
         val chartItem = ArrayList<Double>()
 
-        var z = 0
-        val value = (0..100).random()
-        while (z < 30){
-            yVals.add(BarEntry(z.toFloat(), (0..100).random().toFloat()))
-            color.add(z, resources.getColor(R.color.chart))
-            z++
-        }
+//        var z = 0
+//        val value = (0..100).random()
+//        while (z < 30){
+//            yVals.add(BarEntry(z.toFloat(), (0..100).random().toFloat()))
+//            color.add(z, resources.getColor(R.color.chart))
+//            z++
+//        }
 
         var item = itemDao.all()
         item = item.filter {
@@ -135,6 +156,9 @@ class ShowDataActivity : ToolbarActivity() {
         }
 
         var totalCost = 0.00
+
+        var countArr : ArrayList<Float> = ArrayList()
+        var sumTotalArr : ArrayList<Float> = ArrayList()
 
         if (item.isNotEmpty()) {
 
@@ -155,8 +179,11 @@ class ShowDataActivity : ToolbarActivity() {
                     listItemCost.add(sumTotal)
                     thisDate = dateArr
 
-//                    yVals.add(BarEntry(dateArr.split("/")[0].toFloat(), sumTotal.toFloat()))
-//                    color.add(dateArr.split("/")[0].toInt(), resources.getColor(R.color.chart))
+                    countArr.add(count.toFloat())
+                    sumTotalArr.add(sumTotal.toFloat())
+
+//                    yVals.add(BarEntry(count+1.toFloat(), sumTotal.toFloat()))
+//                    color.add(count, resources.getColor(R.color.chart))
                     sumTotal = 0.00
                     count++
                 }
@@ -168,9 +195,14 @@ class ShowDataActivity : ToolbarActivity() {
             listItemName.add(thisDate)
             listItemCost.add(sumTotal)
 
-//            yVals.add(BarEntry(dateArr.split("/")[0].toFloat(), sumTotal.toFloat()))
-//            color.add(dateArr.split("/")[0].toInt(), resources.getColor(R.color.chart))
-            
+            countArr.add(count.toFloat())
+            sumTotalArr.add(sumTotal.toFloat())
+
+            for ((index, totalPrice) in sumTotalArr.reversed().withIndex()){
+                yVals.add(BarEntry(index+1.toFloat(), totalPrice))
+                color.add(index, resources.getColor(R.color.chart))
+            }
+
             chart.run {
                 setTouchEnabled(false)
                 setDrawBarShadow(false)
@@ -200,6 +232,7 @@ class ShowDataActivity : ToolbarActivity() {
         tv_total_cost.text = totalCost.toString()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume() {
         super.onResume()
         setdata()
@@ -209,5 +242,8 @@ class ShowDataActivity : ToolbarActivity() {
     }
 
     fun IntRange.random() =
+            Random().nextInt((endInclusive + 1) - start) +  start
+
+    fun IntRange.random2() =
             Random().nextInt((endInclusive + 1) - start) +  start
 }

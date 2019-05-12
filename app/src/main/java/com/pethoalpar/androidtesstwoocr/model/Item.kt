@@ -51,7 +51,7 @@ fun constructorItem(): Item {
 fun getCurrentDateTime(): String {
     val date = Calendar.getInstance().time
     val listStringDate = date.toString().split(" ")
-    return listStringDate[2] + "/" + getIntDate(listStringDate[1]) + "/" + listStringDate[5]
+    return listStringDate[2] + "/" + getIntDate(listStringDate[1]) + "/" + (listStringDate[5].toInt()+543).toString()
 }
 
 

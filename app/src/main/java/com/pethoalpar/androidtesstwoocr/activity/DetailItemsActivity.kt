@@ -1,11 +1,16 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import com.kaopiz.kprogresshud.KProgressHUD
 import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.R.color.white
@@ -21,6 +26,18 @@ import kotlinx.android.synthetic.main.activity_detail_items.*
 import org.jetbrains.anko.toast
 import java.util.*
 import javax.inject.Inject
+import android.content.Intent
+import com.pethoalpar.androidtesstwoocr.MainActivity
+import android.provider.MediaStore
+import android.media.MediaScannerConnection
+import android.os.Environment
+import java.nio.file.Files.exists
+import android.os.Environment.getExternalStorageDirectory
+import android.widget.ImageView
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 class DetailItemsActivity : ToolbarActivity() {
@@ -33,6 +50,13 @@ class DetailItemsActivity : ToolbarActivity() {
 
     @Inject
     lateinit var detailItemDao: DetailItemDao
+    private var imgFile:String = ""
+    private lateinit var itemFind:List<Item>
+    private var loading: KProgressHUD? = null
+    private val GALLERY = 1
+    private val CAMERA = 2
+    private var urlNewImage: String = ""
+    private val IMAGE_DIRECTORY = "/demonuts"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +65,42 @@ class DetailItemsActivity : ToolbarActivity() {
         initializeToolbar("รายการซื้อของที่เซเว่น")
         useBack()
 
+        loading = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel(getString(R.string.loading))
+                .setDimAmount(0.5f)
+
         val totalCostString = intent.getStringExtra("totalCost")
-        val imgFile = intent.getStringExtra("imgFile")
-        val checkItem = intent.getStringExtra("item")
+        if (!intent.getStringExtra("imgFile").isNullOrEmpty()){
+            imgFile = intent.getStringExtra("imgFile")
+        }
+        val caseItem = intent.getStringExtra("caseItem")
         val date = intent.getStringExtra("date")
         val receiptNumber = intent.getStringExtra("receiptNumber")
+        val itemId = intent.getIntExtra("itemId", 0)
         val totalCost = if (!totalCostString.isNullOrEmpty()) intOrString(totalCostString) else 0
+        var createNewItem = true
+
+        if (caseItem == "editItem"){
+            itemFind = itemDao.findByItemId(itemId)
+            et_reciept_id.setText(itemFind[0].receiptNumber)
+            et_date.setText(itemFind[0].effectiveDate)
+            et_detail.setText(itemFind[0].detail)
+            et_total_cost.setText(itemFind[0].totalCost.toString())
+            imgFile = itemFind[0].imgUrlFileName
+            createNewItem = false
+        }
+        else if(caseItem == "createNew") {
+            et_reciept_id.setText(receiptNumber)
+            et_date.setText(date)
+            et_total_cost.setText(totalCost.toString())
+        }
+
+
+        if (imgFile != "") {
+            val bitmap = loadBitmap(imgFile)
+            iv_receipt.setImageBitmap(bitmap)
+        }
 
         btn_save_data.setOnClickListener {
 
@@ -55,7 +109,10 @@ class DetailItemsActivity : ToolbarActivity() {
             while (itemDao.findByItemId(item.itemId!!).isNotEmpty())
                 item.itemId = (0..1000).random()
 
-            createItem(item)
+            if (createNewItem)
+                createItem(item)
+            else
+                updateItem(itemFind[0])
 
             val lineItem = constructorLineItem()
             lineItem.itemId = item.itemId
@@ -75,31 +132,115 @@ class DetailItemsActivity : ToolbarActivity() {
         }
 
         btn_delete_data.setOnClickListener {
-            finish()
+            if (caseItem == "editItem"){
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Delete")
+                builder.setIcon(R.drawable.warning_icon)
+
+                builder.setNegativeButton("ยกเลิก"){_, which ->
+
+                }
+                builder.setPositiveButton("ตกลง"){_, which ->
+                    deleteItem(itemFind[0])
+                    finish()
+                }
+
+                val alertDialog: AlertDialog = builder.create()
+                alertDialog.setCancelable(false)
+                alertDialog.show()
+            } else {
+                toast("ไม่มีรายการ")
+            }
         }
 
-        Log.d("PANMAI", totalCost.toString() + ',' + receiptNumber + ',' + date )
-        iv_angle_down.setOnClickListener {
-            if (checkItem != "") {
-                et_reciept_id.setText(receiptNumber)
-                et_total_cost.setText(totalCost.toString())
-                et_date.setText(date)
-
-                if (detail_item.visibility == View.GONE) {
-                    detail_item.visibility = View.VISIBLE
-                    et_reciept_id.setText(receiptNumber)
-                } else {
-                    detail_item.visibility = View.GONE
-                }
+        iv_angle.setOnClickListener {
+            if (detail_item.visibility == View.GONE) {
+                detail_item.visibility = View.VISIBLE
+                iv_angle.setBackgroundResource(R.drawable.angle_up_green)
+            } else {
+                detail_item.visibility = View.GONE
+                iv_angle.setBackgroundResource(R.drawable.angle_down_green)
             }
         }
 
 
-        if (imgFile != null) {
-            val bitmap = loadBitmap(imgFile)
+
+//        iv_edit.setOnClickListener {
+//            takePhotoFromCamera()
+//        }
+
+    }
+
+    fun choosePhotoFromGallary() {
+        val galleryIntent = Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+
+        startActivityForResult(galleryIntent, GALLERY)
+    }
+
+    private fun takePhotoFromCamera() {
+        val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, CAMERA)
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GALLERY) {
+            if (data != null) {
+                val contentURI = data.data
+                try {
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
+                    urlNewImage = saveImage(bitmap)
+
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+        } else if (requestCode == CAMERA) {
+            val thumbnail = data!!.extras!!.get("data") as Bitmap
+            urlNewImage = saveImage(thumbnail)
+            val bitmap = loadBitmap(urlNewImage)
             iv_receipt.setImageBitmap(bitmap)
         }
+    }
 
+    fun saveImage(myBitmap: Bitmap): String {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 10, bytes)
+        val wallpaperDirectory = File(
+                Environment.getExternalStorageDirectory().toString() + IMAGE_DIRECTORY)
+        // have the object build the directory structure, if needed.
+        if (!wallpaperDirectory.exists()) {
+            wallpaperDirectory.mkdirs()
+        }
+
+        try {
+            val f = File(wallpaperDirectory, Calendar.getInstance()
+                    .timeInMillis.toString() + ".jpg")
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this,
+                    arrayOf(f.getPath()),
+                    arrayOf("image/jpeg"), null)
+            fo.close()
+            Log.d("TAG", "File Saved::---&gt;" + f.getAbsolutePath())
+
+            return f.getAbsolutePath()
+        } catch (e1: IOException) {
+            e1.printStackTrace()
+        }
+
+        return ""
+    }
+
+    override fun onPause() {
+        super.onPause()
+        loading!!.dismiss()
     }
 
     private fun loadBitmap(filePath: String): Bitmap {
@@ -117,8 +258,27 @@ class DetailItemsActivity : ToolbarActivity() {
     }
 
     private fun createItem(item: Item) {
+        item.receiptNumber = et_reciept_id.text.toString()
         item.totalCost = et_total_cost.text.toString().toDouble()
+        item.detail = et_detail.text.toString()
+        item.effectiveDate = et_date.text.toString()
+        item.imgUrlFileName = imgFile
         itemDao.create(item)
+
+        Log.d("PANMAI", itemDao.all().find { it.detail == et_detail.text.toString() }!!.effectiveDate)
+    }
+
+    private fun updateItem(item: Item) {
+        item.receiptNumber = et_reciept_id.text.toString()
+        item.totalCost = et_total_cost.text.toString().toDouble()
+        item.detail = et_detail.text.toString()
+        item.effectiveDate = et_date.text.toString()
+        item.imgUrlFileName = imgFile
+        itemDao.update(item)
+    }
+
+    private fun deleteItem(item: Item){
+        itemDao.delete(item)
     }
 
     fun IntRange.random() =

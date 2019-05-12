@@ -5,12 +5,26 @@
     android:background="@android:color/black"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tool_color"
+        android:padding="@dimen/bottom_bar_padding"
+        android:textAlignment="center">
+
+        <Button
+            android:id="@+id/btn_camera"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:background="@drawable/camera_alt" />
+
+    </RelativeLayout>
     <Button
         android:id="@+id/scanButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/bottom_background_color"
+        android:background="@color/tool_color"
         android:orientation="horizontal"
         android:padding="@dimen/bottom_bar_padding"
         android:text="@string/scan"/>

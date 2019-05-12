@@ -55,6 +55,11 @@ class ItemAdapter(private val context: Context, private val titleNames: ArrayLis
             }
         }
 
+        if (position == 0) {
+            holder.layourDetailsItem.visibility = View.VISIBLE
+            holder.angleRight.setBackgroundResource(R.drawable.angle_up_green)
+        }
+
     }
 
 }

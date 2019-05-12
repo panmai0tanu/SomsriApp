@@ -22,7 +22,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:src="@drawable/image_violet"
+            android:src="@drawable/logo_school"
             app:civ_border_color="#FFFFFF"
             app:civ_border_width="2dp" />
 
@@ -40,9 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="3dp"
-                android:width="140dp"
-                android:height="24dp"
-                android:text="info@gmail.com&#x9;" />
+                android:text="school_test@test.com" />
 
             <TextView
                 android:id="@+id/tv_facebook_square"
@@ -54,7 +52,8 @@
                 android:layout_marginBottom="3dp"
                 android:width="14dp"
                 android:height="14dp"
-                android:background="@drawable/facebook_square_sm" />
+                android:background="@drawable/facebook_square_sm"
+                android:visibility="gone"/>
 
             <TextView
                 style="@style/loginBy"
@@ -66,7 +65,36 @@
                 android:layout_toRightOf="@+id/tv_facebook_square"
                 android:width="144dp"
                 android:height="18dp"
-                android:text="เข้าสู่ระบบโดย Facebook " />
+                android:text="เข้าสู่ระบบโดย Facebook "
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_somsri_square"
+                style="@style/facebookSquare"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:width="14dp"
+                android:height="14dp"
+                android:background="@drawable/logo_somsri"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/tv_somsri_connected"
+                style="@style/loginBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_toRightOf="@+id/tv_somsri_square"
+                android:width="144dp"
+                android:height="18dp"
+                android:text="เข้าสู่ระบบโดย Somsri "
+                android:visibility="visible"/>
+
 
         </RelativeLayout>
 
@@ -80,7 +108,8 @@
             android:layout_marginRight="20dp"
             android:width="10dp"
             android:height="18dp"
-            android:background="@drawable/chevron_right" />
+            android:background="@drawable/chevron_right"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
@@ -133,7 +162,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_ic_dropbox"
@@ -175,6 +205,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/layout_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
@@ -274,7 +305,8 @@
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/tv_ic_power_off"

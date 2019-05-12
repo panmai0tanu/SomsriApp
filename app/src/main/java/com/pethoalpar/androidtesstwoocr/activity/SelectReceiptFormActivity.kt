@@ -29,6 +29,7 @@ class SelectReceiptFormActivity : ToolbarActivity() {
         MainApp.graph.inject(this)
         initializeToolbar()
         useBack()
+        setTitle("เลือกรูปแบบใบเสร็จ")
 
         loading = KProgressHUD.create(this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -47,7 +48,7 @@ class SelectReceiptFormActivity : ToolbarActivity() {
 
         iv_other.setOnClickListener {
             val intent = Intent(this, DetailItemsActivity::class.java)
-            intent.putExtra("item", "")
+            intent.putExtra("caseItem", "newItem")
             startActivity(Intent(this, DetailItemsActivity::class.java))
         }
 

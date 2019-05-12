@@ -40,6 +40,7 @@ public class ScanFragment extends Fragment {
     private View view;
     private IScanner scanner;
     private Bitmap original;
+    private Button btnCamera;
     private KProgressHUD loading;
 
     @Override
@@ -74,6 +75,7 @@ public class ScanFragment extends Fragment {
         scanButton.setOnClickListener(new ScanButtonClickListener());
         sourceFrame = (FrameLayout) view.findViewById(R.id.sourceFrame);
         polygonView = (PolygonView) view.findViewById(R.id.polygonView);
+        btnCamera = (Button) view.findViewById(R.id.btn_camera);
         sourceFrame.post(new Runnable() {
             @Override
             public void run() {

@@ -22,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activity.TesseractActivity" />
 
         <provider
@@ -35,7 +34,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".activity.GetData7_11Activity" />
         <activity android:name=".activity.GetData7Activity" />
         <activity android:name=".MainActivity" />
@@ -48,6 +47,7 @@
         <activity android:name=".activity.DetailItemsActivity" />
         <activity android:name=".MainApp" />
         <activity android:name=".activity.SignUpActivity" />
+        <activity android:name=".activity.AbountAppActivity"></activity>
     </application>
 
 </manifest>

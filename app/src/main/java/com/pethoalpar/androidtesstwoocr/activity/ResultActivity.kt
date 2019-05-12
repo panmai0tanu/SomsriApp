@@ -62,6 +62,7 @@ open class ResultActivity : ToolbarActivity() {
             intent.putExtra("imgFile", imgFile)
             intent.putExtra("receiptNumber", date)
             intent.putExtra("receiptNumber", receiptNumber)
+            intent.putExtra("caseItem", "createNew")
             startActivity(intent)
             finish()
         }
