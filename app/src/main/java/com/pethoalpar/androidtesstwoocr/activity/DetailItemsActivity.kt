@@ -57,6 +57,7 @@ class DetailItemsActivity : ToolbarActivity() {
     private val CAMERA = 2
     private var urlNewImage: String = ""
     private val IMAGE_DIRECTORY = "/demonuts"
+    private var checkType = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -163,6 +164,12 @@ class DetailItemsActivity : ToolbarActivity() {
             }
         }
 
+        if (checkbox_expense.isChecked){
+            checkType = "expense"
+        } else if (checkbox_income.isChecked){
+            checkType = "income"
+        }
+
 
 
 //        iv_edit.setOnClickListener {
@@ -263,6 +270,11 @@ class DetailItemsActivity : ToolbarActivity() {
         item.detail = et_detail.text.toString()
         item.effectiveDate = et_date.text.toString()
         item.imgUrlFileName = imgFile
+        if (checkType == "income"){
+            item.itemType = "income"
+        } else{
+            item.itemType = "expense"
+        }
         itemDao.create(item)
 
         Log.d("PANMAI", itemDao.all().find { it.detail == et_detail.text.toString() }!!.effectiveDate)

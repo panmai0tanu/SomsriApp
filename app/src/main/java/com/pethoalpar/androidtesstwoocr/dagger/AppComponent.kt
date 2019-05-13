@@ -7,6 +7,7 @@ import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import com.pethoalpar.androidtesstwoocr.activity.*
 import com.pethoalpar.androidtesstwoocr.adapter.DetailsItemAdapter
 import com.pethoalpar.androidtesstwoocr.adapter.ItemAdapter
+import com.pethoalpar.androidtesstwoocr.services.Service
 import dagger.Component
 import javax.inject.Singleton
 
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 @Component(modules = [(AppModule::class)])
 interface AppComponent {
     fun inject(mainApp: MainApp)
+    fun inject(service: Service)
 
     fun inject(showDataActivity: ShowDataActivity)
     fun inject(resultActivity: ResultActivity)
@@ -30,5 +32,6 @@ interface AppComponent {
     fun inject(loginActivity: LoginActivity)
     fun inject(signUpActivity: SignUpActivity)
     fun inject(itemAdapter: ItemAdapter)
+    fun inject(somsriConnectActivity: SomsriConnectActivity)
 
 }

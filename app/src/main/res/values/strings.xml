@@ -21,4 +21,28 @@
         โปรแกรมอื่นๆ เพื่อการจัดเก็บข้อมูลหรือ\n
         นำข้อมูลไปใช้ประโยชน์\n
     </string>
+    <string name="dialog_welcome">
+        <b>ช่วยคุณบันทึกค่าใช้จ่ายในทุกวัน</b>
+    </string>
+    <string name="dialog_welcome_message">
+        \tแอปพลิเคชันที่จะช่วยให้การบันทึกรายรับ-รายจ่าย\n
+        \t\tเป็นเรื่องง่ายเพียงแค่ถ่ายรูป ฟังก์ชันการส่งข้อมูล\n
+        ที่จะสามารถนำข้อมูลไปใช้งานได้  และรูปแบบการนำเสนอ\n
+        \t\t\t\t\t\tข้อมูลที่เรียบง่าย และสวยงาม
+
+    </string>
+    <string name="title_activity_login2">Sign in</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_show_data_income">ShowDataIncomeActivity</string>
 </resources>

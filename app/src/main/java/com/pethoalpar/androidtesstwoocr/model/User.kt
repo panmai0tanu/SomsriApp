@@ -11,16 +11,33 @@ import java.util.*
 @Entity(tableName = "users")
 data class User(
         @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "user_id") var userId: Int?,
+        @ColumnInfo(name = "id") var id: Int?,
 
-        @ColumnInfo(name = "user_email") var userEmail: String,
+        @ColumnInfo(name = "email") var email: String,
+        @ColumnInfo(name = "created_at") var createdAt: String,
+        @ColumnInfo(name = "updated_at") var updatedAt: String,
+        @ColumnInfo(name = "school_id") var schoolId: Int,
+        @ColumnInfo(name = "full_name") var fullName: String,
+        @ColumnInfo(name = "avatar_file_name") var avatarFileName: String,
+        @ColumnInfo(name = "avatar_content_type") var avatarContentType: String,
+        @ColumnInfo(name = "avatar_file_size") var avatarFileSize: Double,
+        @ColumnInfo(name = "avatar_updated_at") var avatarUpdateAt: String,
         @ColumnInfo(name = "password") var password: String
 )
 
 fun constructorUser(): User {
 
+    val date = getCurrentDateTime()
     val user = User(
             0,
+            "",
+            date,
+            date,
+            0,
+            "",
+            "",
+            "",
+            0.00,
             "",
             "")
     return user

@@ -28,4 +28,5 @@
     <color name="bg_setting">#ECECEC</color>
     <color name="gray_bg">#E2E2E2</color>
     <color name="border_green">#38EAB0</color>
+    <color name="gray_text">#A3A3A3</color>
 </resources>

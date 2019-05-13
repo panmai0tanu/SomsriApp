@@ -6,6 +6,7 @@ import com.pethoalpar.androidtesstwoocr.LoginActivity
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
 import kotlinx.android.synthetic.main.activity_setting.*
+import org.jetbrains.anko.toast
 
 class SettingActivity : ToolbarActivity() {
 
@@ -16,13 +17,20 @@ class SettingActivity : ToolbarActivity() {
         initializeToolbar("Setting")
         useBack()
 
+        toast("เชื่อมต่อสำเร็จ")
+
         btn_logout.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
-        layout_about.setOnClickListener {
-            startActivity(Intent(this,AbountAppActivity::class.java))
+        layout_about.setOnClickListener { _ ->
+            startActivity(Intent(this, AbountAppActivity::class.java))
+        }
+
+        somsri_connect.setOnClickListener { _ ->
+            startActivity(Intent(this, SomsriConnectActivity::class.java))
+            finish()
         }
 
     }

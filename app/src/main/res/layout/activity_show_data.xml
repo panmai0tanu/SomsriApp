@@ -33,7 +33,7 @@
             android:layout_centerInParent="true"
             android:layout_marginRight="50dp"
             android:background="@drawable/chevron_right"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_month_bar"
@@ -50,9 +50,16 @@
         android:layout_height="2dp"
         android:background="@color/border_green" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/bg_chart" />
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:background="@color/bg_chart">
 
         <LinearLayout
@@ -80,24 +87,85 @@
                 android:text="THB" />
 
         </LinearLayout>
-    </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@color/bg_chart" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg_chart">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_text_expense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="รายจ่าย" />
+
+                <ImageView
+                    android:id="@+id/iv_checkbox_expense_check"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/checkbox_icon"
+                    android:visibility="visible"/>
+
+                <ImageView
+                    android:id="@+id/iv_checkbox_expense_no"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/not_checkbox"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/tv_text_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="รายรับ" />
+
+                <ImageView
+                    android:id="@+id/iv_checkbox_income_check"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/checkbox_icon"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/iv_checkbox_income_no"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/not_checkbox"
+                    android:visibility="visible"/>
+            </LinearLayout>
+        </LinearLayout>
+
 
         <TextView
             style="@style/all_expenses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
             android:text="ค่าใช้จ่ายทั้งหมดของเดือนนี้  " />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_chart">
+
+
     </RelativeLayout>
 
     <com.github.mikephil.charting.charts.BarChart
@@ -132,8 +200,8 @@
                 android:id="@+id/new_item"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/buttom_plus"
                 android:gravity="center_vertical">
 

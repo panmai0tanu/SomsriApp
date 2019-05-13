@@ -1,11 +1,13 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.github.mikephil.charting.data.BarData
@@ -19,6 +21,8 @@ import com.pethoalpar.androidtesstwoocr.model.*
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
 import kotlinx.android.synthetic.main.activity_show_data.*
 import kotlinx.android.synthetic.main.activity_toolbar.*
+import kotlinx.android.synthetic.main.dialog_welcome.view.*
+import org.jetbrains.anko.makeCall
 import org.jetbrains.anko.toast
 import java.lang.Math.random
 import java.util.*
@@ -47,6 +51,32 @@ class ShowDataActivity : ToolbarActivity() {
         initializeToolbar(resources.getString(R.string.somsri_expense))
         useSetting()
 
+        dialogWelcome()
+
+        iv_checkbox_expense_check.setOnClickListener {
+            iv_checkbox_expense_check.visibility = View.GONE
+            iv_checkbox_expense_no.visibility = View.VISIBLE
+            setdata()
+        }
+
+        iv_checkbox_expense_no.setOnClickListener {
+            iv_checkbox_expense_no.visibility = View.GONE
+            iv_checkbox_expense_check.visibility = View.VISIBLE
+            setdata()
+        }
+
+        iv_checkbox_income_check.setOnClickListener {
+            iv_checkbox_income_check.visibility = View.GONE
+            iv_checkbox_income_no.visibility = View.VISIBLE
+            setdata()
+        }
+
+        iv_checkbox_income_no.setOnClickListener {
+            iv_checkbox_income_no.visibility = View.GONE
+            iv_checkbox_income_check.visibility = View.VISIBLE
+            setdata()
+        }
+
         new_item.setOnClickListener {
             startActivity(Intent(this, SelectReceiptFormActivity::class.java))
 //            var i = 1
@@ -64,6 +94,30 @@ class ShowDataActivity : ToolbarActivity() {
 //                        newItem.effectiveDate = i.toString() + "/04/2562"
 //                    newItem.detail = "ซื้อของใช้ทั่วไป"
 //                    newItem.totalCost = (50..200).random2().toDouble()
+//                    newItem.itemType = "expense"
+//
+//                    itemDao.create(newItem)
+//                }
+//
+//                i++
+//
+//            }
+//
+//            i = 1
+//            while (i < 32){
+//                if (i == 31)
+//                    toast("Success income!!!")
+//                else {
+//                    newItem = constructorItem()
+//                    newItem.receiptNumber = "R#000123" + (0..1000).random().toString()
+//
+//                    if (i.toString().length == 1)
+//                        newItem.effectiveDate = "0" + i.toString() + "/04/2562"
+//                    else
+//                        newItem.effectiveDate = i.toString() + "/04/2562"
+//                    newItem.detail = "ซื้อของใช้ทั่วไป"
+//                    newItem.totalCost = (50..200).random2().toDouble()
+//                    newItem.itemType = "income"
 //
 //                    itemDao.create(newItem)
 //                }
@@ -138,69 +192,85 @@ class ShowDataActivity : ToolbarActivity() {
         val color: MutableList<Int> = ArrayList()
         val listItemCost = ArrayList<Double>()
         val listItemName = ArrayList<String>()
+        var allSumTotal = 0.00
 
-        val chartItem = ArrayList<Double>()
-
-//        var z = 0
-//        val value = (0..100).random()
-//        while (z < 30){
-//            yVals.add(BarEntry(z.toFloat(), (0..100).random().toFloat()))
-//            color.add(z, resources.getColor(R.color.chart))
-//            z++
-//        }
+        var itemTypeExpense = ""
+        if (iv_checkbox_expense_check.visibility == View.VISIBLE){
+            itemTypeExpense = "expense"
+        }
+        var itemTypeIncome = ""
+        if (iv_checkbox_income_check.visibility == View.VISIBLE) {
+            itemTypeIncome = "income"
+        }
 
         var item = itemDao.all()
         item = item.filter {
-            it.effectiveDate.split("/")[1] == thisMonth &&
-                    it.effectiveDate.split("/")[2] == thisYear
-        }
+                    it.effectiveDate.split("/")[1] == thisMonth &&
+                    it.effectiveDate.split("/")[2] == thisYear &&
+                    it.itemType == itemTypeExpense
+                } + item.filter {
+                it.effectiveDate.split("/")[1] == thisMonth &&
+                    it.effectiveDate.split("/")[2] == thisYear &&
+                    it.itemType == itemTypeIncome
+                }
 
-        var totalCost = 0.00
-
-        var countArr : ArrayList<Float> = ArrayList()
-        var sumTotalArr : ArrayList<Float> = ArrayList()
-
+        val sumTotalArr: ArrayList<Float> = ArrayList()
+        val allDateArr: ArrayList<String> = ArrayList()
         if (item.isNotEmpty()) {
 
             item = item.sortedBy { it.effectiveDate }.reversed()
 
-            var sumTotal = 0.00
-            var count = 0
+            var sumTotalExpense = 0.00
+            var sumTotalIncome = 0.00
             var thisDate = item.first().effectiveDate
             var dateArr = "00/00/0000"
+            var sumTotal = 0.00
 
             for (i in item) {
-                totalCost += i.totalCost
                 dateArr = i.effectiveDate
-
                 if (dateArr == thisDate) {
+                    if (i.itemType == "expense"){
+                        sumTotalExpense += i.totalCost
+                    } else {
+                        sumTotalIncome += i.totalCost
+                    }
                 } else {
+
+                    sumTotal = sumTotalIncome - sumTotalExpense
+                    allSumTotal += sumTotal
+                    sumTotalArr.add(sumTotal.toFloat())
+                    allDateArr.add(thisDate)
                     listItemName.add(thisDate)
                     listItemCost.add(sumTotal)
+
                     thisDate = dateArr
+                    sumTotalExpense = 0.00
+                    sumTotalIncome = 0.00
 
-                    countArr.add(count.toFloat())
-                    sumTotalArr.add(sumTotal.toFloat())
-
-//                    yVals.add(BarEntry(count+1.toFloat(), sumTotal.toFloat()))
-//                    color.add(count, resources.getColor(R.color.chart))
-                    sumTotal = 0.00
-                    count++
+                    if (i.itemType == "expense"){
+                        sumTotalExpense += i.totalCost
+                    } else {
+                        sumTotalIncome += i.totalCost
+                    }
                 }
-
-                sumTotal += i.totalCost
-
             }
 
+            sumTotal = sumTotalIncome - sumTotalExpense
+            allSumTotal += sumTotal
+            sumTotalArr.add(sumTotal.toFloat())
+            allDateArr.add(thisDate)
             listItemName.add(thisDate)
             listItemCost.add(sumTotal)
 
-            countArr.add(count.toFloat())
-            sumTotalArr.add(sumTotal.toFloat())
-
-            for ((index, totalPrice) in sumTotalArr.reversed().withIndex()){
-                yVals.add(BarEntry(index+1.toFloat(), totalPrice))
-                color.add(index, resources.getColor(R.color.chart))
+            for ((index, totalPrice) in sumTotalArr.reversed().withIndex()) {
+                if (totalPrice > 0) {
+                    yVals.add(BarEntry(allDateArr[sumTotalArr.size - index - 1].split("/")[0].toFloat(), totalPrice))
+                    color.add(index, resources.getColor(R.color.chart))
+                }
+                else {
+                    yVals.add(BarEntry(allDateArr[sumTotalArr.size - index - 1].split("/")[0].toFloat(), totalPrice * -1))
+                    color.add(index, resources.getColor(R.color.red))
+                }
             }
 
             chart.run {
@@ -229,7 +299,7 @@ class ShowDataActivity : ToolbarActivity() {
             rv_item.adapter = ItemAdapter(this, listItemName, listItemCost, item)
         }
 
-        tv_total_cost.text = totalCost.toString()
+        tv_total_cost.text = allSumTotal.toString()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -241,9 +311,28 @@ class ShowDataActivity : ToolbarActivity() {
 
     }
 
+    fun dialogWelcome() {
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_welcome, null)
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+        //show dialog
+        val mAlertDialog = mBuilder.show()
+        //login button click of custom layout
+        mDialogView.tv_skip.setOnClickListener {
+            //dismiss dialog
+            mAlertDialog.dismiss()
+        }
+        //cancel button click of custom layout
+        mDialogView.tv_start.setOnClickListener {
+            //dismiss dialog
+            mAlertDialog.dismiss()
+        }
+    }
+
     fun IntRange.random() =
-            Random().nextInt((endInclusive + 1) - start) +  start
+            Random().nextInt((endInclusive + 1) - start) + start
 
     fun IntRange.random2() =
-            Random().nextInt((endInclusive + 1) - start) +  start
+            Random().nextInt((endInclusive + 1) - start) + start
 }

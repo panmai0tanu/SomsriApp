@@ -8,11 +8,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -63,6 +65,8 @@ public class ResultFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Log.d("PANMAI", "xxxx");
 
         AsyncTask.execute(new Runnable() {
             @Override
