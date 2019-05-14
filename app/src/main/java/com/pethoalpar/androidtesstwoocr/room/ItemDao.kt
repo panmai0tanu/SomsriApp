@@ -26,4 +26,7 @@ interface ItemDao {
 
     @Query("delete from items")
     fun deleteAll()
+
+    @Query("select * from items where effective_date = :date")
+    fun findByDate(date: String): List<Item>
 }

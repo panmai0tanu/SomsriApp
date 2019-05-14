@@ -57,7 +57,7 @@ class DetailItemsActivity : ToolbarActivity() {
     private val CAMERA = 2
     private var urlNewImage: String = ""
     private val IMAGE_DIRECTORY = "/demonuts"
-    private var checkType = ""
+    private var checkType = "income"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +89,12 @@ class DetailItemsActivity : ToolbarActivity() {
             et_detail.setText(itemFind[0].detail)
             et_total_cost.setText(itemFind[0].totalCost.toString())
             imgFile = itemFind[0].imgUrlFileName
+            if (itemFind[0].itemType == "expense"){
+                tv_checkbox_income_check.visibility = View.GONE
+                tv_checkbox_income_not_check.visibility = View.VISIBLE
+                tv_checkbox_expense_check.visibility = View.VISIBLE
+                tv_checkbox_expense_not_check.visibility = View.GONE
+            }
             createNewItem = false
         }
         else if(caseItem == "createNew") {
@@ -164,17 +170,31 @@ class DetailItemsActivity : ToolbarActivity() {
             }
         }
 
-        if (checkbox_expense.isChecked){
+        tv_checkbox_expense_not_check.setOnClickListener {
+            tv_checkbox_expense_not_check.visibility = View.GONE
+            tv_checkbox_expense_check.visibility = View.VISIBLE
             checkType = "expense"
-        } else if (checkbox_income.isChecked){
-            checkType = "income"
+            tv_checkbox_income_not_check.visibility = View.VISIBLE
+            tv_checkbox_income_check.visibility = View.GONE
         }
 
-
+        tv_checkbox_income_not_check.setOnClickListener {
+            tv_checkbox_income_not_check.visibility = View.GONE
+            tv_checkbox_income_check.visibility = View.VISIBLE
+            checkType = "income"
+            tv_checkbox_expense_not_check.visibility = View.VISIBLE
+            tv_checkbox_expense_check.visibility = View.GONE
+        }
 
 //        iv_edit.setOnClickListener {
 //            takePhotoFromCamera()
 //        }
+
+    }
+
+    fun validateSaveData(){
+        if (et_reciept_id.text.toString() != ""){}
+        if (et_total_cost.text.toString() != ""){}
 
     }
 

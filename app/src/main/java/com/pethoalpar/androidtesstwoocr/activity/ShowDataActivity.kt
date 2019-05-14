@@ -1,5 +1,6 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
@@ -13,6 +14,11 @@ import androidx.annotation.RequiresApi
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
@@ -40,6 +46,8 @@ class ShowDataActivity : ToolbarActivity() {
     private val originMonth = thisMonth
     private val originYear = thisYear
 
+    protected val deleteCheck = false
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
@@ -51,36 +59,60 @@ class ShowDataActivity : ToolbarActivity() {
         initializeToolbar(resources.getString(R.string.somsri_expense))
         useSetting()
 
-        dialogWelcome()
+        ///////// edit ////////
+        if (itemDao.all().isEmpty()) {
+            dialogWelcome()
+        }
+        validatePermission()
 
         iv_checkbox_expense_check.setOnClickListener {
             iv_checkbox_expense_check.visibility = View.GONE
             iv_checkbox_expense_no.visibility = View.VISIBLE
+            if (iv_checkbox_income_check.visibility == View.VISIBLE){
+                tv_show_sum_total.text = "รายรับรวมทั้งหมดของเดือนนี้"
+            } else {
+                tv_show_sum_total.text = "ค่าใช้จ่ายทั้งหมดของเดือนนี้"
+            }
             setdata()
         }
 
         iv_checkbox_expense_no.setOnClickListener {
             iv_checkbox_expense_no.visibility = View.GONE
             iv_checkbox_expense_check.visibility = View.VISIBLE
+            if (iv_checkbox_income_check.visibility == View.GONE){
+                tv_show_sum_total.text = "รายจ่ายรวมทั้งหมดของเดือนนี้"
+            } else {
+                tv_show_sum_total.text = "ค่าใช้จ่ายทั้งหมดของเดือนนี้"
+            }
             setdata()
         }
 
         iv_checkbox_income_check.setOnClickListener {
             iv_checkbox_income_check.visibility = View.GONE
             iv_checkbox_income_no.visibility = View.VISIBLE
+            if (iv_checkbox_expense_check.visibility == View.VISIBLE){
+                tv_show_sum_total.text = "รายจ่ายรวมทั้งหมดของเดือนนี้"
+            } else {
+                tv_show_sum_total.text = "ค่าใช้จ่ายทั้งหมดของเดือนนี้"
+            }
             setdata()
         }
 
         iv_checkbox_income_no.setOnClickListener {
             iv_checkbox_income_no.visibility = View.GONE
             iv_checkbox_income_check.visibility = View.VISIBLE
+            if (iv_checkbox_expense_check.visibility == View.GONE){
+                tv_show_sum_total.text = "รายรับรวมทั้งหมดของเดือนนี้"
+            } else {
+                tv_show_sum_total.text = "ค่าใช้จ่ายทั้งหมดของเดือนนี้"
+            }
             setdata()
         }
 
         new_item.setOnClickListener {
             startActivity(Intent(this, SelectReceiptFormActivity::class.java))
-//            var i = 1
-//            var newItem: Item
+            var i = 1
+            var newItem: Item
 //            while (i < 32){
 //                if (i == 31)
 //                    toast("Success!!!")
@@ -195,7 +227,7 @@ class ShowDataActivity : ToolbarActivity() {
         var allSumTotal = 0.00
 
         var itemTypeExpense = ""
-        if (iv_checkbox_expense_check.visibility == View.VISIBLE){
+        if (iv_checkbox_expense_check.visibility == View.VISIBLE) {
             itemTypeExpense = "expense"
         }
         var itemTypeIncome = ""
@@ -205,18 +237,28 @@ class ShowDataActivity : ToolbarActivity() {
 
         var item = itemDao.all()
         item = item.filter {
-                    it.effectiveDate.split("/")[1] == thisMonth &&
+            it.effectiveDate.split("/")[1] == thisMonth &&
                     it.effectiveDate.split("/")[2] == thisYear &&
                     it.itemType == itemTypeExpense
-                } + item.filter {
-                it.effectiveDate.split("/")[1] == thisMonth &&
+        } + item.filter {
+            it.effectiveDate.split("/")[1] == thisMonth &&
                     it.effectiveDate.split("/")[2] == thisYear &&
                     it.itemType == itemTypeIncome
-                }
+        }
 
         val sumTotalArr: ArrayList<Float> = ArrayList()
         val allDateArr: ArrayList<String> = ArrayList()
         if (item.isNotEmpty()) {
+
+            yVals.add(BarEntry(0.toFloat(), 0.toFloat()))
+            if (thisMonth.toInt() == 1 || thisMonth.toInt() == 3 || thisMonth.toInt() == 5 || thisMonth.toInt() == 7 ||
+                    thisMonth.toInt() == 8 || thisMonth.toInt() == 10 || thisMonth.toInt() ==12) {
+                yVals.add(BarEntry(32.toFloat (), 0.toFloat()))
+            } else if (thisMonth.toInt() == 2){
+                yVals.add(BarEntry(30.toFloat (), 0.toFloat()))
+            } else {
+                yVals.add(BarEntry(31.toFloat (), 0.toFloat()))
+            }
 
             item = item.sortedBy { it.effectiveDate }.reversed()
 
@@ -229,7 +271,7 @@ class ShowDataActivity : ToolbarActivity() {
             for (i in item) {
                 dateArr = i.effectiveDate
                 if (dateArr == thisDate) {
-                    if (i.itemType == "expense"){
+                    if (i.itemType == "expense") {
                         sumTotalExpense += i.totalCost
                     } else {
                         sumTotalIncome += i.totalCost
@@ -237,9 +279,9 @@ class ShowDataActivity : ToolbarActivity() {
                 } else {
 
                     sumTotal = sumTotalIncome - sumTotalExpense
-                    allSumTotal += sumTotal
                     sumTotalArr.add(sumTotal.toFloat())
                     allDateArr.add(thisDate)
+                    allSumTotal += sumTotal
                     listItemName.add(thisDate)
                     listItemCost.add(sumTotal)
 
@@ -247,7 +289,7 @@ class ShowDataActivity : ToolbarActivity() {
                     sumTotalExpense = 0.00
                     sumTotalIncome = 0.00
 
-                    if (i.itemType == "expense"){
+                    if (i.itemType == "expense") {
                         sumTotalExpense += i.totalCost
                     } else {
                         sumTotalIncome += i.totalCost
@@ -266,8 +308,7 @@ class ShowDataActivity : ToolbarActivity() {
                 if (totalPrice > 0) {
                     yVals.add(BarEntry(allDateArr[sumTotalArr.size - index - 1].split("/")[0].toFloat(), totalPrice))
                     color.add(index, resources.getColor(R.color.chart))
-                }
-                else {
+                } else {
                     yVals.add(BarEntry(allDateArr[sumTotalArr.size - index - 1].split("/")[0].toFloat(), totalPrice * -1))
                     color.add(index, resources.getColor(R.color.red))
                 }
@@ -300,6 +341,7 @@ class ShowDataActivity : ToolbarActivity() {
         }
 
         tv_total_cost.text = allSumTotal.toString()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -309,6 +351,25 @@ class ShowDataActivity : ToolbarActivity() {
         chart.setFitBars(false)
         chart.description = null
 
+    }
+
+    private fun validatePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            Dexter.withActivity(this)
+                    .withPermissions(
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ).withListener(object : MultiplePermissionsListener {
+                        override fun onPermissionsChecked(report: MultiplePermissionsReport) {/* ... */
+                        }
+
+                        override fun onPermissionRationaleShouldBeShown(permissions: List<PermissionRequest>, token: PermissionToken) {/* ... */
+                        }
+
+                    }).check()
+
+        }
     }
 
     fun dialogWelcome() {

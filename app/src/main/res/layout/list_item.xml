@@ -1,73 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_item_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="visible">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_date"
+            style="@style/show_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            style="@style/show_day"
             android:text="วันนี้" />
 
         <RelativeLayout
-            android:id="@+id/item_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/list_item"
-            android:padding="15dp">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_item"
-                style="@style/text_total"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/item_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
-                android:text="ค่าใช้จ่ายรวม" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/list_item"
+                android:padding="15dp">
 
-            <ImageView
-                android:id="@+id/iv_angle"
-                style="@style/angleDown"
-                android:layout_width="7dp"
-                android:layout_height="7dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/angle_down_green" />
+                <TextView
+                    android:id="@+id/tv_text_sum"
+                    style="@style/text_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:text="ค่าใช้จ่ายรวม" />
 
-            <TextView
-                android:id="@+id/tv_thb"
-                style="@style/thb_green"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="15dp"
-                android:layout_toLeftOf="@id/iv_angle"
-                android:text="THB" />
+                <ImageView
+                    android:id="@+id/iv_angle"
+                    style="@style/angleDown"
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/angle_down_green" />
 
-            <TextView
-                android:id="@+id/tv_total_cost_of_day"
-                style="@style/int_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/tv_thb"
-                android:text="325.50" />
+                <TextView
+                    android:id="@+id/tv_thb"
+                    style="@style/thb_green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_toLeftOf="@id/iv_angle"
+                    android:text="THB" />
 
+                <TextView
+                    android:id="@+id/tv_total_cost_of_day"
+                    style="@style/int_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/tv_thb"
+                    android:text="325.50" />
+
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 
@@ -75,8 +83,8 @@
         android:id="@+id/details_item_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_details_item"

@@ -17,8 +17,6 @@ class SettingActivity : ToolbarActivity() {
         initializeToolbar("Setting")
         useBack()
 
-        toast("เชื่อมต่อสำเร็จ")
-
         btn_logout.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()

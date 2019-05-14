@@ -40,13 +40,11 @@ class DetailsItemAdapter(private val context: Context, private val items: List<I
         holder.lineItemLayout.setOnClickListener {
             loading.show()
             val intent = Intent(context, DetailItemsActivity::class.java)
-            Log.d("PANMAI", "adapter: " + item.itemId)
             intent.putExtra("itemId", item.itemId)
             intent.putExtra("caseItem", "editItem")
             context.startActivity(intent)
             loading.dismiss()
         }
-
     }
 
 }
