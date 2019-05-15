@@ -111,52 +111,54 @@ class ShowDataActivity : ToolbarActivity() {
 
         new_item.setOnClickListener {
             startActivity(Intent(this, SelectReceiptFormActivity::class.java))
-            var i = 1
-            var newItem: Item
-//            while (i < 32){
-//                if (i == 31)
-//                    toast("Success!!!")
-//                else {
-//                    newItem = constructorItem()
-//                    newItem.receiptNumber = "R#000123" + (0..1000).random().toString()
-//
-//                    if (i.toString().length == 1)
-//                        newItem.effectiveDate = "0" + i.toString() + "/04/2562"
-//                    else
-//                        newItem.effectiveDate = i.toString() + "/04/2562"
-//                    newItem.detail = "ซื้อของใช้ทั่วไป"
-//                    newItem.totalCost = (50..200).random2().toDouble()
-//                    newItem.itemType = "expense"
-//
-//                    itemDao.create(newItem)
-//                }
-//
-//                i++
-//
-//            }
-//
-//            i = 1
-//            while (i < 32){
-//                if (i == 31)
-//                    toast("Success income!!!")
-//                else {
-//                    newItem = constructorItem()
-//                    newItem.receiptNumber = "R#000123" + (0..1000).random().toString()
-//
-//                    if (i.toString().length == 1)
-//                        newItem.effectiveDate = "0" + i.toString() + "/04/2562"
-//                    else
-//                        newItem.effectiveDate = i.toString() + "/04/2562"
-//                    newItem.detail = "ซื้อของใช้ทั่วไป"
-//                    newItem.totalCost = (50..200).random2().toDouble()
-//                    newItem.itemType = "income"
-//
-//                    itemDao.create(newItem)
-//                }
-//
-//                i++
-//
-//            }
+            if (itemDao.all().isEmpty()) {
+                var i = 1
+                var newItem: Item
+                while (i < 32) {
+                    if (i == 31)
+                        toast("Success!!!")
+                    else {
+                        newItem = constructorItem()
+                        newItem.receiptNumber = "R#000123" + (0..1000).random().toString()
+
+                        if (i.toString().length == 1)
+                            newItem.effectiveDate = "0" + i.toString() + "/04/2562"
+                        else
+                            newItem.effectiveDate = i.toString() + "/04/2562"
+                        newItem.detail = "ซื้อของใช้ทั่วไป"
+                        newItem.totalCost = (50..200).random2().toDouble()
+                        newItem.itemType = "expense"
+
+                        itemDao.create(newItem)
+                    }
+
+                    i++
+
+                }
+
+                i = 1
+                while (i < 32) {
+                    if (i == 31)
+                        toast("Success income!!!")
+                    else {
+                        newItem = constructorItem()
+                        newItem.receiptNumber = "R#000123" + (0..1000).random().toString()
+
+                        if (i.toString().length == 1)
+                            newItem.effectiveDate = "0" + i.toString() + "/04/2562"
+                        else
+                            newItem.effectiveDate = i.toString() + "/04/2562"
+                        newItem.detail = "ซื้อของใช้ทั่วไป"
+                        newItem.totalCost = (50..200).random2().toDouble()
+                        newItem.itemType = "income"
+
+                        itemDao.create(newItem)
+                    }
+
+                    i++
+
+                }
+            }
         }
 
         btn_setting.setOnClickListener {

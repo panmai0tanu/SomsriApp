@@ -1,6 +1,7 @@
 package com.pethoalpar.androidtesstwoocr.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
@@ -15,10 +16,6 @@ import com.pethoalpar.androidtesstwoocr.MainApp
 import com.pethoalpar.androidtesstwoocr.R
 import com.pethoalpar.androidtesstwoocr.R.color.white
 import com.pethoalpar.androidtesstwoocr.ToolbarActivity
-import com.pethoalpar.androidtesstwoocr.model.Item
-import com.pethoalpar.androidtesstwoocr.model.constructorDetailItem
-import com.pethoalpar.androidtesstwoocr.model.constructorItem
-import com.pethoalpar.androidtesstwoocr.model.constructorLineItem
 import com.pethoalpar.androidtesstwoocr.room.DetailItemDao
 import com.pethoalpar.androidtesstwoocr.room.ItemDao
 import com.pethoalpar.androidtesstwoocr.room.LineItemDao
@@ -34,6 +31,11 @@ import android.os.Environment
 import java.nio.file.Files.exists
 import android.os.Environment.getExternalStorageDirectory
 import android.widget.ImageView
+import com.pethoalpar.androidtesstwoocr.model.*
+import com.pethoalpar.androidtesstwoocr.room.UserDao
+import com.pethoalpar.androidtesstwoocr.services.Service
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -44,7 +46,10 @@ class DetailItemsActivity : ToolbarActivity() {
 
     @Inject
     lateinit var itemDao: ItemDao
-
+    @Inject
+    lateinit var userDao: UserDao
+    @Inject
+    lateinit var service: Service
     @Inject
     lateinit var lineItemDao: LineItemDao
 
@@ -52,7 +57,7 @@ class DetailItemsActivity : ToolbarActivity() {
     lateinit var detailItemDao: DetailItemDao
     private var imgFile:String = ""
     private lateinit var itemFind:List<Item>
-    private var loading: KProgressHUD? = null
+    lateinit var loading: KProgressHUD
     private val GALLERY = 1
     private val CAMERA = 2
     private var urlNewImage: String = ""
@@ -96,6 +101,44 @@ class DetailItemsActivity : ToolbarActivity() {
                 tv_checkbox_expense_not_check.visibility = View.GONE
             }
             createNewItem = false
+
+            if (userDao.all().isNotEmpty()) {
+                tv_share.visibility = View.VISIBLE
+            } else{
+                tv_share.visibility = View.GONE
+            }
+            tv_share.setOnClickListener {
+                if (userDao.all().isNotEmpty()) {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("ส่งข้อมูล: " + et_detail.text)
+                    builder.setIcon(R.drawable.warning_icon)
+
+                    builder.setNegativeButton("ยกเลิก") { _, which ->
+
+                    }
+                    builder.setPositiveButton("ตกลง") { _, which ->
+                        loading.show()
+                        service.sendData(userDao.all().first().id, itemFind[0].itemId, itemFind[0].detail,itemFind[0].totalCost, itemFind[0].effectiveDate)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe({
+                                    Log.d("PANMAI2", "success!! : " + it.detail)
+                                    toast("ส่งข้อมูลเรียบร้อยแล้ว")
+
+                                }, { error ->
+                                    Log.d("PANMAI", "ERROR: " + error.message)
+                                })
+                        loading.show()
+                        finish()
+                    }
+
+                    val alertDialog: AlertDialog = builder.create()
+                    alertDialog.setCancelable(false)
+                    alertDialog.show()
+                } else {
+                    toast("กรุณาเชื่อมต่อกับสมศรี")
+                }
+            }
         }
         else if(caseItem == "createNew") {
             et_reciept_id.setText(receiptNumber)
@@ -135,7 +178,6 @@ class DetailItemsActivity : ToolbarActivity() {
             while (detailItemDao.findByDetailItemId(detailItem.detailItemId!!).isNotEmpty())
                 detailItem.detailItemId = (0..1000).random()
 
-            finish()
         }
 
         btn_delete_data.setOnClickListener {
@@ -189,6 +231,19 @@ class DetailItemsActivity : ToolbarActivity() {
 //        iv_edit.setOnClickListener {
 //            takePhotoFromCamera()
 //        }
+
+        var checkDelete = false
+        var newCost: String = ""
+        for (i in et_total_cost.text) {
+            if (i == '.') {
+                checkDelete = true
+            }
+
+            if (!checkDelete)
+                newCost += i
+        }
+
+        et_total_cost.setText(newCost)
 
     }
 
@@ -285,19 +340,27 @@ class DetailItemsActivity : ToolbarActivity() {
     }
 
     private fun createItem(item: Item) {
-        item.receiptNumber = et_reciept_id.text.toString()
-        item.totalCost = et_total_cost.text.toString().toDouble()
-        item.detail = et_detail.text.toString()
-        item.effectiveDate = et_date.text.toString()
-        item.imgUrlFileName = imgFile
-        if (checkType == "income"){
-            item.itemType = "income"
-        } else{
-            item.itemType = "expense"
-        }
-        itemDao.create(item)
 
-        Log.d("PANMAI", itemDao.all().find { it.detail == et_detail.text.toString() }!!.effectiveDate)
+        if (et_reciept_id.text.toString() != "" && et_total_cost.text.toString() != ""
+                && et_detail.text.toString() != "" && et_date.text.toString() != "") {
+            item.receiptNumber = et_reciept_id.text.toString()
+            item.totalCost = et_total_cost.text.toString().toDouble()
+            item.detail = et_detail.text.toString()
+            item.effectiveDate = et_date.text.toString()
+            item.imgUrlFileName = imgFile
+            if (checkType == "income") {
+                item.itemType = "income"
+            } else {
+                item.itemType = "expense"
+            }
+
+            itemDao.create(item)
+            finish()
+
+        } else {
+            toast("กรุณากรอกข้อมูลให้ครบถ้วน")
+            et_reciept_id.setBackgroundResource(R.color.red)
+        }
     }
 
     private fun updateItem(item: Item) {

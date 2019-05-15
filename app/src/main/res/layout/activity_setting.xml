@@ -24,17 +24,33 @@
             android:layout_marginBottom="15dp"
             android:src="@drawable/logo"
             app:civ_border_color="#FFFFFF"
-            app:civ_border_width="2dp" />
+            app:civ_border_width="2dp"
+            android:visibility="visible"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tv_img_pro_logined"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/logo_school"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp"
+            android:visibility="gone"/>
 
         <RelativeLayout
+            android:id="@+id/layout_info"
             android:layout_width="wrap_content"
             android:layout_height="64dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="7dp"
             android:layout_toLeftOf="@+id/tv_chevron_right"
-            android:layout_toRightOf="@+id/tv_img_pro">
+            android:layout_toRightOf="@+id/tv_img_pro"
+            android:visibility="visible">
 
             <TextView
+                android:id="@+id/tv_email"
                 style="@style/infoGmailCom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,8 +110,79 @@
                 android:height="18dp"
                 android:text="เข้าสู่ระบบโดย Somsri "
                 android:visibility="gone"/>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/layout_info_loged"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="7dp"
+            android:layout_toLeftOf="@+id/tv_chevron_right"
+            android:layout_toRightOf="@+id/tv_img_pro_logined"
+            android:visibility="gone">
 
+            <TextView
+                android:id="@+id/tv_email_loged"
+                style="@style/infoGmailCom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:text="Somsri Expense" />
+
+            <TextView
+                android:id="@+id/tv_facebook_square_loged"
+                style="@style/facebookSquare"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:width="14dp"
+                android:height="14dp"
+                android:background="@drawable/facebook_square_sm"
+                android:visibility="gone"/>
+
+            <TextView
+                style="@style/loginBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_toRightOf="@+id/tv_facebook_square_loged"
+                android:width="144dp"
+                android:height="18dp"
+                android:text="เข้าสู่ระบบโดย Facebook "
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_somsri_square_loged"
+                style="@style/facebookSquare"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:width="14dp"
+                android:height="14dp"
+                android:background="@drawable/logo_somsri"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/tv_somsri_connected_loged"
+                style="@style/loginBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_toRightOf="@+id/tv_somsri_square_loged"
+                android:width="144dp"
+                android:height="18dp"
+                android:text="เข้าสู่ระบบโดย Somsri "
+                android:visibility="visible"/>
         </RelativeLayout>
 
         <TextView

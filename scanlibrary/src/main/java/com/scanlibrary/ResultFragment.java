@@ -66,8 +66,6 @@ public class ResultFragment extends Fragment {
             e.printStackTrace();
         }
 
-        Log.d("PANMAI", "xxxx");
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {

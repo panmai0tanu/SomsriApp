@@ -10,19 +10,22 @@ import java.util.*
 
 @Entity(tableName = "users")
 data class User(
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "id") var id: Int?,
+        @PrimaryKey
+        @ColumnInfo(name = "id") var id: Int,
 
         @ColumnInfo(name = "email") var email: String,
         @ColumnInfo(name = "created_at") var createdAt: String,
         @ColumnInfo(name = "updated_at") var updatedAt: String,
         @ColumnInfo(name = "school_id") var schoolId: Int,
         @ColumnInfo(name = "full_name") var fullName: String,
+        @ColumnInfo(name = "name") var name: String,
         @ColumnInfo(name = "avatar_file_name") var avatarFileName: String,
         @ColumnInfo(name = "avatar_content_type") var avatarContentType: String,
         @ColumnInfo(name = "avatar_file_size") var avatarFileSize: Double,
         @ColumnInfo(name = "avatar_updated_at") var avatarUpdateAt: String,
-        @ColumnInfo(name = "password") var password: String
+        @ColumnInfo(name = "password") var password: String,
+        @ColumnInfo(name = "status") var status: Boolean
+
 )
 
 fun constructorUser(): User {
@@ -37,9 +40,11 @@ fun constructorUser(): User {
             "",
             "",
             "",
+            "",
             0.00,
             "",
-            "")
+            "",
+            false)
     return user
 }
 
