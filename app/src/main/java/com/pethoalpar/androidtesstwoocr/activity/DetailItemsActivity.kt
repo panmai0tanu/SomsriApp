@@ -136,7 +136,7 @@ class DetailItemsActivity : ToolbarActivity() {
                     }
 
                     val alertDialog: AlertDialog = builder.create()
-                    alertDialog.setCancelable(false)
+                    alertDialog.setCanceledOnTouchOutside(true)
                     alertDialog.show()
                 } else {
                     toast("กรุณาเชื่อมต่อกับสมศรี")
@@ -200,7 +200,7 @@ class DetailItemsActivity : ToolbarActivity() {
                 }
 
                 val alertDialog: AlertDialog = builder.create()
-                alertDialog.setCancelable(false)
+                alertDialog.setCanceledOnTouchOutside(true)
                 alertDialog.show()
             } else {
                 toast("ไม่มีรายการ")

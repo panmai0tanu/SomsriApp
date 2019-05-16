@@ -14,26 +14,39 @@
         android:background="@drawable/select_month"
         android:orientation="horizontal">
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/btn_chev_left"
-            style="@style/chevronLeft"
-            android:layout_width="10dp"
-            android:layout_height="18dp"
+            android:layout_width="20dp"
+            android:layout_height="28dp"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="50dp"
-            android:background="@drawable/chevron_left" />
+            android:layout_marginLeft="80dp"
+            android:visibility="visible">
 
-        <ImageView
+            <ImageView
+                style="@style/chevronLeft"
+                android:layout_width="10dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/chevron_left" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/btn_chev_right"
-            style="@style/chevronRight"
-            android:layout_width="10dp"
-            android:layout_height="18dp"
+            android:layout_width="20dp"
+            android:layout_height="28dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="50dp"
-            android:background="@drawable/chevron_right"
-            android:visibility="gone" />
+            android:layout_marginRight="80dp"
+            android:visibility="gone">
+
+            <ImageView
+                style="@style/chevronRight"
+                android:layout_width="10dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/chevron_right" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_month_bar"
@@ -42,6 +55,15 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="พฤศจิกายน 2561" />
+
+        <ImageView
+            android:id="@+id/iv_select"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/select"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"/>
 
     </RelativeLayout>
 
@@ -54,7 +76,6 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@color/bg_chart" />
-
 
 
     <RelativeLayout
@@ -111,14 +132,14 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/checkbox_icon"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_checkbox_expense_no"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/not_checkbox"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
             </LinearLayout>
 
             <LinearLayout
@@ -138,7 +159,7 @@
                     android:layout_height="20dp"
                     android:layout_marginLeft="8dp"
                     android:src="@drawable/checkbox_icon"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/iv_checkbox_income_no"
@@ -146,7 +167,7 @@
                     android:layout_height="20dp"
                     android:layout_marginLeft="8dp"
                     android:src="@drawable/not_checkbox"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
 
@@ -156,8 +177,8 @@
             style="@style/all_expenses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
             android:text="รายรับรวมทั้งหมดของเดือนนี้  " />
     </RelativeLayout>
 
