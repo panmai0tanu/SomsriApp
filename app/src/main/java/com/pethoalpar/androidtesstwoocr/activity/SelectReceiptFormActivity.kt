@@ -38,10 +38,46 @@ class SelectReceiptFormActivity : ToolbarActivity() {
 
         validatePermission()
 
+        val intent = Intent(this, TesseractActivity::class.java)
+        intent.putExtra("languageProcess", "eng")
         iv_sevenEleven.setOnClickListener {
-            val intent = Intent(this, TesseractActivity::class.java)
-            intent.putExtra("languageProcess", "eng")
             intent.putExtra("receiptForm", "7eleven")
+            startActivity(intent)
+            loading.show()
+        }
+
+        iv_makro.setOnClickListener {
+            intent.putExtra("receiptForm", "makro")
+            startActivity(intent)
+            loading.show()
+        }
+
+        iv_tesco.setOnClickListener {
+            intent.putExtra("receiptForm", "tesco")
+            startActivity(intent)
+            loading.show()
+        }
+
+        iv_bigc.setOnClickListener {
+            intent.putExtra("receiptForm", "bigc")
+            startActivity(intent)
+            loading.show()
+        }
+
+        iv_family.setOnClickListener {
+            intent.putExtra("receiptForm", "family")
+            startActivity(intent)
+            loading.show()
+        }
+
+        iv_tops.setOnClickListener {
+            intent.putExtra("receiptForm", "tops")
+            startActivity(intent)
+            loading.show()
+        }
+
+        iv_central_food.setOnClickListener {
+            intent.putExtra("receiptForm", "central")
             startActivity(intent)
             loading.show()
         }

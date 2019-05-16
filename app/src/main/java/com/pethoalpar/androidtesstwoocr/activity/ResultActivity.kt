@@ -38,8 +38,13 @@ open class ResultActivity : ToolbarActivity() {
         val receiptForm = intent.getStringExtra("receiptForm")
         imgFile = intent.getStringExtra("imgFile")
 
-        if (receiptForm == "7eleven"){
+        if (receiptForm == "7eleven") {
             val intent = (Intent(this, GetData7Activity::class.java))
+            intent.putExtra("result", result)
+            intent.putExtra("languageProcess", languageProcess)
+            startActivityForResult(intent, REQUEST_CODE)
+        } else if (receiptForm == "makro") {
+            val intent = (Intent(this, GetDataMakroActivity::class.java))
             intent.putExtra("result", result)
             intent.putExtra("languageProcess", languageProcess)
             startActivityForResult(intent, REQUEST_CODE)
@@ -60,7 +65,7 @@ open class ResultActivity : ToolbarActivity() {
             val intent = Intent(this, DetailItemsActivity::class.java)
             intent.putExtra("totalCost", totalCost)
             intent.putExtra("imgFile", imgFile)
-            intent.putExtra("receiptNumber", date)
+            intent.putExtra("date", date)
             intent.putExtra("receiptNumber", receiptNumber)
             intent.putExtra("caseItem", "createNew")
             startActivity(intent)

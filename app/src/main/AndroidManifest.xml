@@ -55,6 +55,7 @@
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.AbountAppActivity" />
         <activity android:name=".activity.SomsriConnectActivity" />
+        <activity android:name=".activity.GetDataMakroActivity"></activity>
     </application>
 
 </manifest>
