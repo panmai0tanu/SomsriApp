@@ -81,10 +81,13 @@ class DetailItemsActivity : ToolbarActivity() {
             imgFile = intent.getStringExtra("imgFile")
         }
         val caseItem = intent.getStringExtra("caseItem")
-        val date = intent.getStringExtra("date")
         val receiptNumber = intent.getStringExtra("receiptNumber")
         val itemId = intent.getIntExtra("itemId", 0)
-        val totalCost = if (!totalCostString.isNullOrEmpty()) intOrString(totalCostString) else 0
+        val totalCost = totalCostString
+        var date = intent.getStringExtra("date")
+        date = date.replace('-', '/')
+        date = date.replace('.', '/')
+
         var createNewItem = true
 
         if (caseItem == "editItem"){
@@ -153,6 +156,8 @@ class DetailItemsActivity : ToolbarActivity() {
         }
 
         btn_save_data.setOnClickListener {
+
+//            if (et_total_cost.text.toString())
 
             val item = constructorItem()
             item.itemId = (0..1000).random()
@@ -232,18 +237,18 @@ class DetailItemsActivity : ToolbarActivity() {
 //            takePhotoFromCamera()
 //        }
 
-        var checkDelete = false
-        var newCost: String = ""
-        for (i in et_total_cost.text) {
-            if (i == '.') {
-                checkDelete = true
-            }
-
-            if (!checkDelete)
-                newCost += i
-        }
-
-        et_total_cost.setText(newCost)
+//        var checkDelete = false
+//        var newCost: String = ""
+//        for (i in et_total_cost.text) {
+//            if (i == '.') {
+//                checkDelete = true
+//            }
+//
+//            if (!checkDelete)
+//                newCost += i
+//        }
+//
+//        et_total_cost.setText(newCost)
 
     }
 
@@ -341,26 +346,48 @@ class DetailItemsActivity : ToolbarActivity() {
 
     private fun createItem(item: Item) {
 
-        if (et_reciept_id.text.toString() != "" && et_total_cost.text.toString() != ""
-                && et_detail.text.toString() != "" && et_date.text.toString() != "") {
-            item.receiptNumber = et_reciept_id.text.toString()
-            item.totalCost = et_total_cost.text.toString().toDouble()
-            item.detail = et_detail.text.toString()
-            item.effectiveDate = et_date.text.toString()
-            item.imgUrlFileName = imgFile
-            if (checkType == "income") {
-                item.itemType = "income"
-            } else {
-                item.itemType = "expense"
+        et_reciept_id.setBackgroundResource(R.color.white)
+        et_date.setBackgroundResource(R.color.white)
+        et_detail.setBackgroundResource(R.color.white)
+        et_total_cost.setBackgroundResource(R.color.white)
+
+        if (et_reciept_id.text.toString() == "") {
+            toast("กรุณาตรวจสอบข้อมูล!!")
+            et_reciept_id.setBackgroundResource(R.color.red)
+        } else if (et_detail.text.toString() == "") {
+            toast("กรุณาตรวจสอบข้อมูล!!")
+            et_detail.setBackgroundResource(R.color.red)
+        } else if (et_date.text.toString() == "") {
+            toast("กรุณาตรวจสอบข้อมูล!!")
+            et_date.setBackgroundResource(R.color.red)
+        } else {
+            val checkTotalCost = et_total_cost.text.toString().split(".")
+            var checkValidate = false
+            for (i in checkTotalCost){
+                if (i.toIntOrNull() == null){
+                    et_total_cost.setBackgroundResource(R.color.red)
+                    checkValidate = true
+                }
             }
 
-            itemDao.create(item)
-            finish()
+            if (!checkValidate) {
+                item.receiptNumber = et_reciept_id.text.toString()
+                item.totalCost = et_total_cost.text.toString().toDouble()
+                item.detail = et_detail.text.toString()
+                item.effectiveDate = et_date.text.toString()
+                item.imgUrlFileName = imgFile
+                if (checkType == "income") {
+                    item.itemType = "income"
+                } else {
+                    item.itemType = "expense"
+                }
 
-        } else {
-            toast("กรุณากรอกข้อมูลให้ครบถ้วน")
-            et_reciept_id.setBackgroundResource(R.color.red)
+                itemDao.create(item)
+                finish()
+            }
         }
+
+
     }
 
     private fun updateItem(item: Item) {

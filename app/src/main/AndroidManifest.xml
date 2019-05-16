@@ -55,7 +55,11 @@
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.AbountAppActivity" />
         <activity android:name=".activity.SomsriConnectActivity" />
-        <activity android:name=".activity.GetDataMakroActivity"></activity>
+        <activity android:name=".activity.GetDataMakroActivity" />
+        <activity android:name=".activity.BigCActivity" />
+        <activity android:name=".activity.TescoActivity" />
+        <activity android:name=".activity.TopsActivity" />
+        <activity android:name=".activity.FamilyMartActivity"></activity>
     </application>
 
 </manifest>

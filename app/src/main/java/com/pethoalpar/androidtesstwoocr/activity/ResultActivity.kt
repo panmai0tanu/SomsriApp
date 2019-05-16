@@ -48,6 +48,31 @@ open class ResultActivity : ToolbarActivity() {
             intent.putExtra("result", result)
             intent.putExtra("languageProcess", languageProcess)
             startActivityForResult(intent, REQUEST_CODE)
+        } else if (receiptForm == "bigc") {
+            val intent = (Intent(this, BigCActivity::class.java))
+            intent.putExtra("result", result)
+            intent.putExtra("languageProcess", languageProcess)
+            startActivityForResult(intent, REQUEST_CODE)
+        } else if (receiptForm == "tesco") {
+            val intent = (Intent(this, TescoActivity::class.java))
+            intent.putExtra("result", result)
+            intent.putExtra("languageProcess", languageProcess)
+            startActivityForResult(intent, REQUEST_CODE)
+        } else if (receiptForm == "tops") {
+            val intent = (Intent(this, TopsActivity::class.java))
+            intent.putExtra("result", result)
+            intent.putExtra("languageProcess", languageProcess)
+            startActivityForResult(intent, REQUEST_CODE)
+        }  else if (receiptForm == "central") {
+            val intent = (Intent(this, TopsActivity::class.java))
+            intent.putExtra("result", result)
+            intent.putExtra("languageProcess", languageProcess)
+            startActivityForResult(intent, REQUEST_CODE)
+        }   else if (receiptForm == "family") {
+            val intent = (Intent(this, FamilyMartActivity::class.java))
+            intent.putExtra("result", result)
+            intent.putExtra("languageProcess", languageProcess)
+            startActivityForResult(intent, REQUEST_CODE)
         }
 
         runOnUiThread { loadingDialog = ProgressDialog.show(this, null, getString(R.string.loading), true, false) }

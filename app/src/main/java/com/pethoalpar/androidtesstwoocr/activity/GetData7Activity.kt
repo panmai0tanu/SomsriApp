@@ -84,7 +84,7 @@ class GetData7Activity : AppCompatActivity() {
             } else i++
         }
 
-        intentResult.putExtra("totalPrice", totalPriceStr)
+        intentResult.putExtra("totalCost", totalPriceStr)
         intentResult.putExtra("item", itemText)
         intentResult.putExtra("date", date)
         intentResult.putExtra("receiptNumber", receiptNumber)
