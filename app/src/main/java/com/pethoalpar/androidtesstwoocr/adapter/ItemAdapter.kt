@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 
 class ItemAdapter(private val context: Context, private val titleNames: ArrayList<String>, private val costs: ArrayList<Double>,
-                  private val item: List<Item>) : RecyclerView.Adapter<ItemViewHolder>() {
+                  private val item: List<Item>, private val selectShow: String) : RecyclerView.Adapter<ItemViewHolder>() {
 
     @Inject
     lateinit var itemDao: ItemDao
@@ -39,25 +39,32 @@ class ItemAdapter(private val context: Context, private val titleNames: ArrayLis
         val cost = costs[position]
         holder.totalCostOfDay.text = cost.toString()
 
-        if (getCurrentDateTime() == date)
-            holder.dateName.text = "วันนี้"
-        else
-            holder.dateName.text = date
+//        if (selectShow == "Date") {
+            if (getCurrentDateTime() == date)
+                holder.dateName.text = "วันนี้"
+            else
+                holder.dateName.text = date
 
-        val itemList = item.filter { it.effectiveDate == date }
+            val itemList = item.filter { it.effectiveDate == date }
 
-        holder.rvDetailItem.layoutManager = LinearLayoutManager(context)
-        holder.rvDetailItem.adapter = DetailsItemAdapter(context, itemList)
+            holder.rvDetailItem.layoutManager = LinearLayoutManager(context)
+            holder.rvDetailItem.adapter = DetailsItemAdapter(context, itemList)
 
-        holder.btnItem.setOnClickListener {
-            if (holder.layourDetailsItem.visibility == View.GONE) {
-                holder.layourDetailsItem.visibility = View.VISIBLE
-                holder.angleRight.setBackgroundResource(R.drawable.angle_up_green)
-            } else {
-                holder.layourDetailsItem.visibility = View.GONE
-                holder.angleRight.setBackgroundResource(R.drawable.angle_down_green)
+            holder.btnItem.setOnClickListener {
+                if (holder.layourDetailsItem.visibility == View.GONE) {
+                    holder.layourDetailsItem.visibility = View.VISIBLE
+                    holder.angleRight.setBackgroundResource(R.drawable.angle_up_green)
+                } else {
+                    holder.layourDetailsItem.visibility = View.GONE
+                    holder.angleRight.setBackgroundResource(R.drawable.angle_down_green)
+                }
             }
-        }
+//        } else {
+//            if (getCurrentDateTime().split("/")[1] + getCurrentDateTime().split("/")[1] == date)
+//                holder.dateName.text = "วันนี้"
+//            else
+//                holder.dateName.text = date
+//        }
 
 //        holder.deleteItem.setOnClickListener {
 //            val item = itemDao.findByDate(date)
