@@ -16,7 +16,7 @@ import com.pethoalpar.androidtesstwoocr.room.UserDao
     User::class,
     LineItem::class,
     DetailItem::class
-], version = 21, exportSchema = false)
+], version = 22, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao
     abstract fun userDao(): UserDao

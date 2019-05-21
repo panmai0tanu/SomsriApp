@@ -85,8 +85,10 @@ class DetailItemsActivity : ToolbarActivity() {
         val itemId = intent.getIntExtra("itemId", 0)
         val totalCost = totalCostString
         var date = intent.getStringExtra("date")
-        date = date.replace('-', '/')
-        date = date.replace('.', '/')
+        if (!date.isNullOrEmpty()) {
+            date = date.replace('-', '/')
+            date = date.replace('.', '/')
+        }
 
         var createNewItem = true
 

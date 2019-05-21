@@ -114,54 +114,6 @@ class ShowDataActivity : ToolbarActivity() {
 
         new_item.setOnClickListener {
             startActivity(Intent(this, SelectReceiptFormActivity::class.java))
-            if (itemDao.all().isEmpty()) {
-                var i = 1
-                var newItem: Item
-                while (i < 32) {
-                    if (i == 31)
-                        toast("Success!!!")
-                    else {
-                        newItem = constructorItem()
-                        newItem.receiptNumber = "R#000123" + (0..1000).random().toString()
-
-                        if (i.toString().length == 1)
-                            newItem.effectiveDate = "0" + i.toString() + "/04/2562"
-                        else
-                            newItem.effectiveDate = i.toString() + "/04/2562"
-                        newItem.detail = "ซื้อของใช้ทั่วไป"
-                        newItem.totalCost = (50..200).random2().toDouble()
-                        newItem.itemType = "expense"
-
-                        itemDao.create(newItem)
-                    }
-
-                    i++
-
-                }
-
-                i = 1
-                while (i < 32) {
-                    if (i == 31)
-                        toast("Success income!!!")
-                    else {
-                        newItem = constructorItem()
-                        newItem.receiptNumber = "R#000123" + (0..1000).random().toString()
-
-                        if (i.toString().length == 1)
-                            newItem.effectiveDate = "0" + i.toString() + "/04/2562"
-                        else
-                            newItem.effectiveDate = i.toString() + "/04/2562"
-                        newItem.detail = "ซื้อของใช้ทั่วไป"
-                        newItem.totalCost = (50..200).random2().toDouble()
-                        newItem.itemType = "income"
-
-                        itemDao.create(newItem)
-                    }
-
-                    i++
-
-                }
-            }
         }
 
         btn_setting.setOnClickListener {
@@ -230,10 +182,10 @@ class ShowDataActivity : ToolbarActivity() {
 
         iv_select.setOnClickListener {
             val options: Array<String> = arrayOf("Day", "Month")
-            lateinit var dialog:AlertDialog
+            lateinit var dialog: AlertDialog
             val builder = AlertDialog.Builder(this)
             builder.setTitle("เลือกรูปแบบการแสดงผล")
-            builder.setSingleChoiceItems(options,checkedItem) { _, which->
+            builder.setSingleChoiceItems(options, checkedItem) { _, which ->
                 if (selectShow != options[which]) {
                     checkedItem = which
                     selectShow = options[which]
@@ -252,7 +204,6 @@ class ShowDataActivity : ToolbarActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     private fun setdata() {
-        toast(selectShow)
 
         if (selectShow == "Day")
             tv_month_bar.text = "${getMonthName(thisMonth)} ${(thisYear.toInt())}"
@@ -312,8 +263,10 @@ class ShowDataActivity : ToolbarActivity() {
                 yVals.add(BarEntry(13.toFloat(), 0.toFloat()))
             }
 
-            item = item.sortedBy { it.effectiveDate.split("/")[2] + it.effectiveDate.split("/")[1] +
-                                    it.effectiveDate.split("/")[2] }.reversed()
+            item = item.sortedBy {
+                it.effectiveDate.split("/")[2] + it.effectiveDate.split("/")[1] +
+                        it.effectiveDate.split("/")[0]
+            }.reversed()
 
             if (selectShow == "Day") {
                 var sumTotalExpense = 0.00

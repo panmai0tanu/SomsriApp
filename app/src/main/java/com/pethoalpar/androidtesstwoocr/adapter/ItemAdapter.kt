@@ -39,17 +39,17 @@ class ItemAdapter(private val context: Context, private val titleNames: ArrayLis
         val cost = costs[position]
         holder.totalCostOfDay.text = cost.toString()
 
-//        if (selectShow == "Date") {
-            if (getCurrentDateTime() == date)
-                holder.dateName.text = "วันนี้"
-            else
-                holder.dateName.text = date
+        if (getCurrentDateTime() == date)
+            holder.dateName.text = "วันนี้"
+        else
+            holder.dateName.text = date
 
-            val itemList = item.filter { it.effectiveDate == date }
+        val itemList = item.filter { it.effectiveDate == date }
 
-            holder.rvDetailItem.layoutManager = LinearLayoutManager(context)
-            holder.rvDetailItem.adapter = DetailsItemAdapter(context, itemList)
+        holder.rvDetailItem.layoutManager = LinearLayoutManager(context)
+        holder.rvDetailItem.adapter = DetailsItemAdapter(context, itemList)
 
+        if (selectShow == "Day") {
             holder.btnItem.setOnClickListener {
                 if (holder.layourDetailsItem.visibility == View.GONE) {
                     holder.layourDetailsItem.visibility = View.VISIBLE
@@ -59,42 +59,18 @@ class ItemAdapter(private val context: Context, private val titleNames: ArrayLis
                     holder.angleRight.setBackgroundResource(R.drawable.angle_down_green)
                 }
             }
-//        } else {
-//            if (getCurrentDateTime().split("/")[1] + getCurrentDateTime().split("/")[1] == date)
-//                holder.dateName.text = "วันนี้"
-//            else
-//                holder.dateName.text = date
-//        }
+        } else {
+            holder.angleRight.visibility = View.GONE
+        }
 
-//        holder.deleteItem.setOnClickListener {
-//            val item = itemDao.findByDate(date)
-//            val builder = AlertDialog.Builder(context)
-//            builder.setTitle("Delete")
-//            builder.setIcon(R.drawable.warning_icon)
-//
-//            builder.setNegativeButton("ยกเลิก"){_, which ->
-//
-//            }
-//            builder.setPositiveButton("ตกลง"){_, which ->
-//                deleteItem(item[0])
-//                holder.layoutItem.visibility = View.INVISIBLE
-//            }
-//
-//            val alertDialog: AlertDialog = builder.create()
-//            alertDialog.setCancelable(false)
-//            alertDialog.show()
-//        }
-
-
-
-        if (position == 0) {
+        if (position == 0 && selectShow == "Day") {
             holder.layourDetailsItem.visibility = View.VISIBLE
             holder.angleRight.setBackgroundResource(R.drawable.angle_up_green)
         }
 
     }
 
-    private fun deleteItem(item: Item){
+    private fun deleteItem(item: Item) {
         itemDao.delete(item)
     }
 
@@ -108,6 +84,6 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val totalCostOfDay = view.tv_total_cost_of_day
     val dateName = view.tv_date
     val textSum = view.tv_text_sum
-//    val deleteItem = view.iv_delete_item
+    //    val deleteItem = view.iv_delete_item
     val layoutItem = view.layout_item_list
 }
